@@ -1,0 +1,6 @@
+require(reshape)
+id <- c(1,1,2,2)
+time <- c(1,2,1,2)
+X1 <- c(5,3,6,2)
+X2 <- c(6,5,1,4)
+mydata <- data.frame(id, time, X1, X2, stringsAsFactors=FALSE)

@@ -1,0 +1,5 @@
+g1 <- function(x) return(sin(x))
+g2 <- function(x) return(sqrt(x^2+1))
+g3 <- function(x) return(2*x-1)
+plot(c(0,1), c(-1,1.5))
+for (f in c(g1, g2, g3)) plot(f, 0, 1, add=T)
