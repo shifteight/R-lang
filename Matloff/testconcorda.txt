@@ -1,6 +1,0 @@
-the here means that the first item in this line of output is
-item in this case our output consists of only one line and one
-item so this is redundant but this notation helps to read
-voluminous output that consists of many items spread over many
-lines for example if there were two rows of output with six items
-per row the second row would be labeled
