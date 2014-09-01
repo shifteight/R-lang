@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="线性回归">线性回归</h1>
+<p>面对一个数据集，比如Advertising，包括四个变量，sales，TV，radio，newspaper。我们要问几个问题：</p>
+<ol style="list-style-type: decimal">
+<li>广告预算与销售额之间有关系吗？</li>
+<li>如果有上述关系，这种关系有多强？</li>
+<li>哪种广告媒介影响销售额？</li>
+<li>广告媒介对销售额的影响能准确估计吗？</li>
+<li>能准确预测未来的销售额吗？</li>
+<li>广告支出与销售额之间的关系是线性的吗？</li>
+<li>广告媒介之间存在协同效应吗？</li>
+</ol>
+<h2 id="简单线性回归">简单线性回归</h2>
+<p>假设<span class="math">\(X\)</span>和<span class="math">\(Y\)</span>之间近似存在线性关系： <span class="math">\[Y\approx \beta_0 + \beta_1 X.\]</span> 一旦获得了参数的估计值<span class="math">\(\hat{\beta}_0,\hat{\beta}_1\)</span>，我们就可以根据某个特定的<span class="math">\(X\)</span>，预测<span class="math">\(Y\)</span>： <span class="math">\[\hat{y}=\hat{\beta}_0 + \hat{\beta}_1 x,\]</span> 其中，<span class="math">\(\hat{y}\)</span>表示在<span class="math">\(X=x\)</span>时<span class="math">\(Y\)</span>的一个预测。</p>
+<p>我们要找到最能够拟合数据集的参数估计，使得组成的直线尽可能靠近数据点。有多种方式来衡量“近”，最常用的方法之一是最小二乘法（OLS）。简单线性回归的OLS估计为： <span class="math">\[\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i -\bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2},\]</span> <span class="math">\[\hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x},\]</span> 其中，<span class="math">\(\bar{y},\bar{x}\)</span>为样本均值。</p>
+</body>
+</html>
