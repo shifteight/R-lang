@@ -1,3 +1,7 @@
+% 统计学习笔记
+% Kevin Qian
+% 二零一四年九月
+
 # 线性回归 #
 面对一个数据集，比如Advertising，包括四个变量，sales，TV，radio，newspaper。我们要问几个问题：
 
@@ -67,6 +71,7 @@ $$F=\frac{(\mathrm{TSS}-\mathrm{RSS})/p}{\mathrm{RSS}/(n-p-1)},$$
 
 ### 定性预测子 ###
 定性变量一般称为因子（factor），其可能的取值称为水平（level）。对于仅有两个水平的因子，将其加入模型是非常简单的，只要构造一个哑变量。比如，对于gender变量，可以构造一个新的变量$x_i$，当第$i$个人为女性时取1，反之取0。相应的回归模型可以写成：
+
 $$
 \begin{eqnarray}
 y_i = \beta_0 + \beta_1 x_i + \epsilon_i =
@@ -81,3 +86,9 @@ $$
 
 ### 线性模型的拓展 ###
 标准线性回归模型带有很多假设，其中涉及自变量和应变量关系的两个重要假设是可加性（additive）和线性（linear）。
+
+可加性条件的放松，常见是加入交互项，以$\mathtt{Advertising}$数据集为例，可加入$\mathtt{radio}\times \mathtt{TV}$。
+
+    层次原理（hierarchical principle）：如果模型中包括交互项，即使主效应对应的p值不显著，也必须包括在模型中。
+
+交互项可以包含定量和定性的变量。比如$\mathtt{Credit}$数据集，设想我们希望通过$\mathtt{income}$和$\mathtt{student}$预测$\mathtt{balance}$。当不包括交互项时，模型可以表示为两条平行线，$\mathtt{income}$对$\mathtt{balance}$的平均影响与是不是学生无关。这样的模型是有局限的，解决办法是加入交互项。加入收入和学生的交互项后，可以得到两条回归线，截距和斜率均不同。
