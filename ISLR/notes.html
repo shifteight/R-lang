@@ -5,16 +5,87 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Kevin Qian" />
-  <title>统计学习笔记</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="/Users/kevin/Bak/styles/style.css" type="text/css" />
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <title>Notes on Statistical Learning with R</title>
+  <link rel="stylesheet" href="../styles/github.css" type="text/css" />
+  <script type="text/javascript">/*<![CDATA[*/
+  /* 
+  March 19, 2004 MathHTML (c) Peter Jipsen http://www.chapman.edu/~jipsen
+  Released under the GNU General Public License version 2 or later.
+  See the GNU General Public License (at http://www.gnu.org/copyleft/gpl.html)
+  for more details.
+  */
+  
+  function convertMath(node) {// for Gecko
+    if (node.nodeType==1) {
+      var newnode = 
+        document.createElementNS("http://www.w3.org/1998/Math/MathML",
+          node.nodeName.toLowerCase());
+      for(var i=0; i < node.attributes.length; i++)
+        newnode.setAttribute(node.attributes[i].nodeName,
+          node.attributes[i].nodeValue);
+      for (var i=0; i<node.childNodes.length; i++) {
+        var st = node.childNodes[i].nodeValue;
+        if (st==null || st.slice(0,1)!=" " && st.slice(0,1)!="\n") 
+          newnode.appendChild(convertMath(node.childNodes[i]));
+      }
+      return newnode;
+    }
+    else return node;
+  }
+  
+  function convert() {
+    var mmlnode = document.getElementsByTagName("math");
+    var st,str,node,newnode;
+    for (var i=0; i<mmlnode.length; i++)
+      if (document.createElementNS!=null)
+        mmlnode[i].parentNode.replaceChild(convertMath(mmlnode[i]),mmlnode[i]);
+      else { // convert for IE
+        str = "";
+        node = mmlnode[i];
+        while (node.nodeName!="/MATH") {
+          st = node.nodeName.toLowerCase();
+          if (st=="#text") str += node.nodeValue;
+          else {
+            str += (st.slice(0,1)=="/" ? "</m:"+st.slice(1) : "<m:"+st);
+            if (st.slice(0,1)!="/") 
+               for(var j=0; j < node.attributes.length; j++)
+                 if (node.attributes[j].nodeValue!="italic" &&
+                   node.attributes[j].nodeValue!="" &&
+                   node.attributes[j].nodeValue!="inherit" &&
+                   node.attributes[j].nodeValue!=undefined)
+                   str += " "+node.attributes[j].nodeName+"="+
+                       "\""+node.attributes[j].nodeValue+"\"";
+            str += ">";
+          }
+          node = node.nextSibling;
+          node.parentNode.removeChild(node.previousSibling);
+        }
+        str += "</m:math>";
+        newnode = document.createElement("span");
+        node.parentNode.replaceChild(newnode,node);
+        newnode.innerHTML = str;
+      }
+  }
+  
+  if (document.createElementNS==null) {
+    document.write("<object id=\"mathplayer\"\
+    classid=\"clsid:32F66A20-7614-11D4-BD11-00104BD3F987\"></object>");
+    document.write("<?import namespace=\"m\" implementation=\"#mathplayer\"?>");
+  }
+  if(typeof window.addEventListener != 'undefined'){
+    window.addEventListener('load', convert, false);
+  }
+  if(typeof window.attachEvent != 'undefined') {
+    window.attachEvent('onload', convert);
+  }
+  /*]]>*/
+  </script>
 </head>
 <body>
 <div id="header">
-<h1 class="title">统计学习笔记</h1>
+<h1 class="title">Notes on Statistical Learning with R</h1>
 <h2 class="author">Kevin Qian</h2>
-<h3 class="date">二零一四年九月</h3>
+<h3 class="date">September, 2014</h3>
 </div>
 <h1 id="线性回归">线性回归</h1>
 <p>面对一个数据集，比如Advertising，包括四个变量，sales，TV，radio，newspaper。我们要问几个问题：</p>
@@ -28,10 +99,10 @@
 <li>广告媒介之间存在协同效应吗？</li>
 </ol>
 <h2 id="简单线性回归">简单线性回归</h2>
-<p>假设<span class="math">\(X\)</span>和<span class="math">\(Y\)</span>之间近似存在线性关系： <span class="math">\[Y\approx \beta_0 + \beta_1 X.\]</span> 一旦获得了参数的估计值<span class="math">\(\hat{\beta}_0,\hat{\beta}_1\)</span>，我们就可以根据某个特定的<span class="math">\(X\)</span>，预测<span class="math">\(Y\)</span>： <span class="math">\[\hat{y}=\hat{\beta}_0 + \hat{\beta}_1 x,\]</span> 其中，<span class="math">\(\hat{y}\)</span>表示在<span class="math">\(X=x\)</span>时<span class="math">\(Y\)</span>的一个预测。</p>
-<p>我们要找到最能够拟合数据集的参数估计，使得组成的直线尽可能靠近数据点。有多种方式来衡量“近”，最常用的方法之一是最小二乘法（OLS）。简单线性回归的OLS估计为： <span class="math">\[\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i -\bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2},\]</span> <span class="math">\[\hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x},\]</span> 其中，<span class="math">\(\bar{y},\bar{x}\)</span>为样本均值。</p>
+<p>假设<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>X</mi></mrow></math>和<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi></mrow></math>之间近似存在线性关系： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi><mo>≈</mo><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><mi>X</mi><mo>.</mo></mrow></math> 一旦获得了参数的估计值<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mn>0</mn></msub><mo>,</mo><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mn>1</mn></msub></mrow></math>，我们就可以根据某个特定的<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>X</mi></mrow></math>，预测<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi></mrow></math>： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>y</mi><mo accent="true">^</mo></mover><mo>=</mo><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mn>0</mn></msub><mo>+</mo><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mn>1</mn></msub><mi>x</mi><mo>,</mo></mrow></math> 其中，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>y</mi><mo accent="true">^</mo></mover></mrow></math>表示在<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>X</mi><mo>=</mo><mi>x</mi></mrow></math>时<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi></mrow></math>的一个预测。</p>
+<p>我们要找到最能够拟合数据集的参数估计，使得组成的直线尽可能靠近数据点。有多种方式来衡量“近”，最常用的方法之一是最小二乘法（OLS）。简单线性回归的OLS估计为： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mn>1</mn></msub><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo stretchy="false">)</mo></mrow><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mo>,</mo></mrow></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mn>0</mn></msub><mo>=</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo>−</mo><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mn>1</mn></msub><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>,</mo></mrow></math> 其中，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo>,</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover></mrow></math>为样本均值。</p>
 <h2 id="多元线性回归">多元线性回归</h2>
-<p><span class="math">\[Y=\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p + \epsilon.\]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi><mo>=</mo><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><msub><mi>X</mi><mn>1</mn></msub><mo>+</mo><msub><mi>β</mi><mn>2</mn></msub><msub><mi>X</mi><mn>2</mn></msub><mo>+</mo><mo>⋯</mo><mo>+</mo><msub><mi>β</mi><mi>p</mi></msub><msub><mi>X</mi><mi>p</mi></msub><mo>+</mo><mi>ε</mi><mo>.</mo></mrow></math></p>
 <p>作多元回归，一般要回答四个问题：</p>
 <ol style="list-style-type: decimal">
 <li>响应变量和自变量之间相关吗？</li>
@@ -40,43 +111,58 @@
 <li>给定自变量值，如何预测响应变量的值？预测的准确性如何？</li>
 </ol>
 <h3 id="问题1响应变量与自变量之间有关系吗">问题1：响应变量与自变量之间有关系吗？</h3>
-<p>对于这个问题，可以用F检验。原假设为所有的参数均为0： <span class="math">\[ H_0:\beta_1 = \beta_2 = \cdots = \beta_p = 0;\quad H_a: \exists j,\beta_j\neq 0.\]</span> 构造F统计量： <span class="math">\[F=\frac{(\mathrm{TSS}-\mathrm{RSS})/p}{\mathrm{RSS}/(n-p-1)},\]</span> 可以证明，当原假设为真时，上述统计量中分子和分母的期望值均为<span class="math">\(\sigma^2\)</span>（误差方差），因此，如果自变量和响应变量不存在关系，F统计量应该接近1。到底F多大时，可以拒绝原假设？这要看<span class="math">\(n\)</span>和<span class="math">\(p\)</span>的大小。当<span class="math">\(n\)</span>较大时，即使F统计量只比1稍大也可以拒绝原假设。反之，当<span class="math">\(n\)</span>比较小时，需要更大的F值。当<span class="math">\(H_0\)</span>为真且误差项服从正态分布时，F统计量服从F分布。由此，可以从相应的p值来判断是否可以拒绝原假设。</p>
+<p>对于这个问题，可以用F检验。原假设为所有的参数均为0： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><msub><mi>β</mi><mn>1</mn></msub><mo>=</mo><msub><mi>β</mi><mn>2</mn></msub><mo>=</mo><mo>⋯</mo><mo>=</mo><msub><mi>β</mi><mi>p</mi></msub><mo>=</mo><mn>0</mn><mo>;</mo><mspace width="1em"></mspace><msub><mi>H</mi><mi>a</mi></msub><mo>:</mo><mo>∃</mo><mi>j</mi><mo>,</mo><msub><mi>β</mi><mi>j</mi></msub><mo>≠</mo><mn>0</mn><mo>.</mo></mrow></math> 构造F统计量： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>F</mi><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mtext mathvariant="normal">TSS</mtext><mo>−</mo><mtext mathvariant="normal">RSS</mtext><mo stretchy="false">)</mo><mo>/</mo><mi>p</mi></mrow><mrow><mtext mathvariant="normal">RSS</mtext><mo>/</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mfrac><mo>,</mo></mrow></math> 可以证明，当原假设为真时，上述统计量中分子和分母的期望值均为<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>σ</mi><mn>2</mn></msup></mrow></math>（误差方差），因此，如果自变量和响应变量不存在关系，F统计量应该接近1。到底F多大时，可以拒绝原假设？这要看<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>n</mi></mrow></math>和<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>p</mi></mrow></math>的大小。当<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>n</mi></mrow></math>较大时，即使F统计量只比1稍大也可以拒绝原假设。反之，当<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>n</mi></mrow></math>比较小时，需要更大的F值。当<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>H</mi><mn>0</mn></msub></mrow></math>为真且误差项服从正态分布时，F统计量服从F分布。由此，可以从相应的p值来判断是否可以拒绝原假设。</p>
 <p>（TODO：F检验与t检验的关系，为何需要F检验？）</p>
 <h3 id="问题2哪些变量是重要的">问题2：哪些变量是重要的？</h3>
 <p>多元回归分析的第一步，是计算F统计量并检查相应的p值。如果这一步得出至少有一个自变量与响应变量有关，那么很自然地，我们要找出哪些是重要的（应该进入模型），这项任务称为“变量选择”。我们可以查看每一个变量的p值（t检验），但是如果自变量数量很多（p很大），这种办法会导致错误。</p>
-<p>通过选取不同的变量，可以生成<span class="math">\(2^p\)</span>个模型。当<span class="math">\(p\)</span>较大时，尝试所有的模型显然是不切实际的。我们需要一种自动且有效的方法来选取一部分模型进行考虑。有三种传统办法：</p>
+<p>通过选取不同的变量，可以生成<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mn>2</mn><mi>p</mi></msup></mrow></math>个模型。当<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>p</mi></mrow></math>较大时，尝试所有的模型显然是不切实际的。我们需要一种自动且有效的方法来选取一部分模型进行考虑。有三种传统办法：</p>
 <ul>
 <li>前向选择。</li>
-<li>后向选择。当<span class="math">\(p&gt;n\)</span>时不可用。</li>
+<li>后向选择。当<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>p</mi><mo>&gt;</mo><mi>n</mi></mrow></math>时不可用。</li>
 <li>混合选择。</li>
 </ul>
 <h3 id="问题3模型拟合性">问题3：模型拟合性</h3>
-<p>最常用的两个衡量拟合性的数值是RSE和<span class="math">\(R^2\)</span>。一元回归中，<span class="math">\(R^2=\mathrm{Cov}(X,Y)^2\)</span>；在多元线性回归中，<span class="math">\(R^2=\mathrm{Cov}(Y,\hat{Y})^2\)</span>。事实上，拟合线性模型的一个性质就是，使这个相关系数在所有线性模型中最大。</p>
+<p>最常用的两个衡量拟合性的数值是RSE和<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>R</mi><mn>2</mn></msup></mrow></math>。一元回归中，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>R</mi><mn>2</mn></msup><mo>=</mo><mtext mathvariant="normal">Cov</mtext><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></math>；在多元线性回归中，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>R</mi><mn>2</mn></msup><mo>=</mo><mtext mathvariant="normal">Cov</mtext><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mover><mi>Y</mi><mo accent="true">^</mo></mover><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></math>。事实上，拟合线性模型的一个性质就是，使这个相关系数在所有线性模型中最大。</p>
 <p>除了看RSE和R方，还可以通过图形来观察。在销售额的例子中，如果作出sales ~ TV + radio的三维图，从残差的分布情况可以看到，变量之间存在非线性，意味着可能需要加入交互项（协同效应）。</p>
 <h3 id="问题4预测">问题4：预测</h3>
 <p>利用回归得到的参数估计来预测，会面临三类不确定性：</p>
 <ol style="list-style-type: decimal">
-<li>可减少误差。来自OLS回归平面<span class="math">\(\hat{Y}\)</span>与真实总体回归平面<span class="math">\(f(X)\)</span>之间的差距，可以由置信区间来表示。</li>
+<li>可减少误差。来自OLS回归平面<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>Y</mi><mo accent="true">^</mo></mover></mrow></math>与真实总体回归平面<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow></math>之间的差距，可以由置信区间来表示。</li>
 <li>模型偏差。来自线性模型与实际不符产生的误差，这种误差也是可减少的。</li>
-<li>不可减少误差。即使我们知道真实的参数，也会面临由随机误差项带来的不可减少的误差。也就是<span class="math">\(Y\)</span>与<span class="math">\(\hat{Y}\)</span>的差距。可以用预测区间来表示。</li>
+<li>不可减少误差。即使我们知道真实的参数，也会面临由随机误差项带来的不可减少的误差。也就是<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi></mrow></math>与<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>Y</mi><mo accent="true">^</mo></mover></mrow></math>的差距。可以用预测区间来表示。</li>
 </ol>
 <p>（TODO：预测区间与置信区间的区别？）</p>
 <h2 id="回归模型中的其他问题">回归模型中的其他问题</h2>
 <h3 id="定性预测子">定性预测子</h3>
-<p>定性变量一般称为因子（factor），其可能的取值称为水平（level）。对于仅有两个水平的因子，将其加入模型是非常简单的，只要构造一个哑变量。比如，对于gender变量，可以构造一个新的变量<span class="math">\(x_i\)</span>，当第<span class="math">\(i\)</span>个人为女性时取1，反之取0。相应的回归模型可以写成：</p>
-<p><span class="math">\[
-\begin{eqnarray}
-y_i = \beta_0 + \beta_1 x_i + \epsilon_i =
-\begin{cases}
-\beta_0 + \beta_1 + \epsilon_i       &amp; \mathrm{第i个为女性} \\
-\beta_0 + \epsilon_i       &amp; \mathrm{第i个为男性}
-\end{cases}
-\end{eqnarray}
-\]</span> 回归系数的解释： 对于取三个可能值的变量，可以定义两个亚变量，模型参数的解释类似。定性变量的编码方式不唯一，但不同方式都将得到同样的模型拟合结果，只是系数及其解释不同（都表示某种比较）。</p>
+<p>定性变量一般称为因子（factor），其可能的取值称为水平（level）。对于仅有两个水平的因子，将其加入模型是非常简单的，只要构造一个哑变量。比如，对于gender变量，可以构造一个新的变量<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>x</mi><mi>i</mi></msub></mrow></math>，当第<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>i</mi></mrow></math>个人为女性时取1，反之取0。相应的回归模型可以写成：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mtable><mtr><mtd columnalign="right"><msub><mi>y</mi><mi>i</mi></msub><mo>=</mo><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><msub><mi>x</mi><mi>i</mi></msub><mo>+</mo><msub><mi>ε</mi><mi>i</mi></msub><mo>=</mo><mrow><mo stretchy="true">{</mo><mtable><mtr><mtd><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><mo>+</mo><msub><mi>ε</mi><mi>i</mi></msub></mtd><mtd><mtext mathvariant="normal">第</mtext><mi>i</mi><mtext mathvariant="normal">个为女性</mtext></mtd></mtr><mtr><mtd><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>ε</mi><mi>i</mi></msub></mtd><mtd><mtext mathvariant="normal">第</mtext><mi>i</mi><mtext mathvariant="normal">个为男性</mtext></mtd></mtr></mtable></mrow></mtd></mtr></mtable></mrow></math> 回归系数的解释： 对于取三个可能值的变量，可以定义两个亚变量，模型参数的解释类似。定性变量的编码方式不唯一，但不同方式都将得到同样的模型拟合结果，只是系数及其解释不同（都表示某种比较）。</p>
 <h3 id="线性模型的拓展">线性模型的拓展</h3>
 <p>标准线性回归模型带有很多假设，其中涉及自变量和应变量关系的两个重要假设是可加性（additive）和线性（linear）。</p>
-<p>可加性条件的放松，常见是加入交互项，以<span class="math">\(\mathtt{Advertising}\)</span>数据集为例，可加入<span class="math">\(\mathtt{radio}\times \mathtt{TV}\)</span>。</p>
-<pre><code>层次原理（hierarchical principle）：如果模型中包括交互项，即使主效应对应的p值不显著，也必须包括在模型中。</code></pre>
-<p>交互项可以包含定量和定性的变量。比如<span class="math">\(\mathtt{Credit}\)</span>数据集，设想我们希望通过<span class="math">\(\mathtt{income}\)</span>和<span class="math">\(\mathtt{student}\)</span>预测<span class="math">\(\mathtt{balance}\)</span>。当不包括交互项时，模型可以表示为两条平行线，<span class="math">\(\mathtt{income}\)</span>对<span class="math">\(\mathtt{balance}\)</span>的平均影响与是不是学生无关。这样的模型是有局限的，解决办法是加入交互项。加入收入和学生的交互项后，可以得到两条回归线，截距和斜率均不同。</p>
+<p>我们可以通过加入交互项放松可加性条件。以Advertising数据集为例，可加入radio <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>×</mo></mrow></math> TV。有时，加入的交互项显著，而主效应却不显著。此时，要不要包括主效应呢？统计学习中有如下原理。</p>
+<p><strong>层次原理</strong>（hierarchical principle）：如果模型中包括交互项，即使主效应对应的p值不显著，也必须包括在模型中。</p>
+<p>交互项可以包含定量和定性的变量。比如Credit数据集，设想我们希望通过income和student预测balance。当不包括交互项时，模型可以表示为两条平行线，income对balance的平均影响与是不是学生无关。这样的模型是有局限的，解决办法是加入交互项。加入收入和学生的交互项后，可以得到两条回归线，截距和斜率均不同。</p>
+<p>体现非线性关系的一种简单形式是多项式回归。</p>
+<h3 id="潜在问题">潜在问题</h3>
+<p>拟合线性回归模型时常常会碰到如下问题：</p>
+<ol style="list-style-type: decimal">
+<li>非线性关系。</li>
+<li>误差项相关。</li>
+<li>异方差。</li>
+<li>异常值。</li>
+<li>高杠杆值。</li>
+<li>共线性。</li>
+</ol>
+<p><strong>非线性关系</strong>。用残差对于拟合值作残差图，如果模型是线性的，残差图不应该呈现明显的模式。如果残差图显示有非线性特征，可以对自变量进行简单非线性变换，比如<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>log</mi><mi>X</mi></mrow></math>，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msqrt><mi>X</mi></msqrt></mrow></math>或<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msup><mi>X</mi><mn>2</mn></msup></mrow></math>等。当然，还有更加高级的处理非线性问题的方法。</p>
+<p><strong>误差项相关</strong>。如果误差项相关，那么标准误差将被低估，带来的结果是，置信区间和预测区间都将变窄。比如，95%的置信区间实际包含真实参数值的概率要比0.95小得多。另外，模型对应的p值也将变小，这将导致误以为参数是显著的。最常见的例子是时间序列。</p>
+<p><strong>异方差</strong>。当误差项的方差不同时，标准误、置信区间和相应的假设检验都将不靠谱。鉴别异方差的一种方法是看残差图是不是出现所谓的漏斗状（funnel shape）。出现这种情况，一种解决办法是对应变量<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi></mrow></math>进行对数或开方等非线性变换，从而大大缩小<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>Y</mi></mrow></math>的值并减少异方差。有时，我们对每一个应变量的方差有较为明确的认识，这时可以采用某种形式的加权最小二乘法（WLS）。</p>
+<p><strong>异常值</strong>。所谓异常值，是指<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>y</mi><mi>i</mi></msub></mrow></math>与其预测值差距很大的数据点。异常值一般对模型拟合影响不大，但会对RSE、R方产生影响。残差图可以探测异常值，但实践中通常残差大小难以决断，这时可以用t化残差来判断，一般t化残差绝对值大于3的观测可能是异常值。模型分析中是否要移除异常值，需要谨慎考虑。</p>
+<p><strong>高杠杆值</strong>。与异常值关注<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>y</mi><mi>i</mi></msub></mrow></math>不同，高杠杆值是看<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>x</mi><mi>i</mi></msub></mrow></math>是否不同寻常。如果一个观测的自变量比其他观测明显要大时，可能就是高杠杆值。相比异常值，高杠杆值对模型拟合有较大影响。衡量一个观测的杠杆度，一般用杠杆统计量，对于简单线性回归，杠杆统计量由下式计算： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>+</mo><mfrac><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>ʹ</mo><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>ʹ</mo></mrow></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac><mo>.</mo></mrow></math> 显然，如果<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>x</mi><mi>i</mi></msub></mrow></math>与<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover></mrow></math>差异越大，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>h</mi><mi>i</mi></msub></mrow></math>越大。此外，杠杆值必定位于<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mn>1</mn><mo>/</mo><mi>n</mi></mrow></math>和1之间，所有观测的平均杠杆值等于<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>/</mo><mi>n</mi></mrow></math>。因此，当某个观测的杠杆值超过<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>/</mo><mi>n</mi></mrow></math>较多时，我们有理由怀疑它是高杠杆值。如果一个观测既是异常值，又是高杠杆值，是非常危险的组合，需要高度重视！</p>
+<p><strong>共线性</strong>。如果模型中某些自变量之间相关时，回归系数的准确性会降低，对应的标准误会增大，从而t统计量会减小，结果导致该拒绝原假设时没拒绝，也就是降低了假设检验的power。一个检测共线性的简单办法是看自变量的相关矩阵，其中一个较大的值表示变量之间相关性较高。但是，相关矩阵只能看两个变量的关系，而共线性可能存在与三个及以上变量之间，也就是多重共线性。此时，更好的办法是计算方差膨胀因子（VIF）。计算如下： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mtext mathvariant="normal">VIF</mtext><mo stretchy="false">(</mo><msub><mover><mi>β</mi><mo accent="true">^</mo></mover><mi>j</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msubsup><mi>R</mi><mrow><msub><mi>X</mi><mi>j</mi></msub><mo stretchy="false">∣</mo><msub><mi>X</mi><mrow><mo>−</mo><mi>j</mi></mrow></msub></mrow><mn>2</mn></msubsup></mrow></mfrac><mo>.</mo></mrow></math> 其中，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msubsup><mi>R</mi><mrow><msub><mi>X</mi><mi>j</mi></msub><mo stretchy="false">∣</mo><msub><mi>X</mi><mrow><mo>−</mo><mi>j</mi></mrow></msub></mrow><mn>2</mn></msubsup></mrow></math>是<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>X</mi><mi>j</mi></msub></mrow></math>对其他所有自变量进行回归得到的R方。如果<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msubsup><mi>R</mi><mrow><msub><mi>X</mi><mi>j</mi></msub><mo stretchy="false">∣</mo><msub><mi>X</mi><mrow><mo>−</mo><mi>j</mi></mrow></msub></mrow><mn>2</mn></msubsup></mrow></math>接近1，存在共线性，此时VIF很大。面临共线性问题，有两种常用解决办法，一种是去掉一个问题变量，另一种是将共线性的变量合并成一个变量（比如标准化后取平均）。</p>
+<h2 id="市场营销方案">市场营销方案</h2>
+<p>现在可以用多元回归分析的结果回答开头提出的七个问题。</p>
+<h2 id="线性回归与k-近邻">线性回归与<em>K</em>-近邻</h2>
+<p>线性回归属于参数方法，优点易于拟合和解释，缺点是容易脱离实际，导致预测不准。非参数方法也可用于回归，一个简单著名的例子是KNN回归。KNN回归与KNN分类器密切相关。给定<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>K</mi></mrow></math>和预测点<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>x</mi><mn>0</mn></msub></mrow></math>，KNN回归首先找到与<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>x</mi><mn>0</mn></msub></mrow></math>最接近的<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>K</mi></mrow></math>个训练点，组成集合<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mo>ℕ</mo><mn>0</mn></msub></mrow></math>，接着，用这些训练点的响应值的均值来估计<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo stretchy="false">)</mo></mrow></math>： <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>f</mi><mo accent="true">^</mo></mover><mo stretchy="false">(</mo><msub><mi>x</mi><mn>0</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mi>K</mi></mfrac><munder><mo>∑</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>∈</mo><msub><mo>ℕ</mo><mn>0</mn></msub></mrow></munder><msub><mi>y</mi><mi>i</mi></msub><mo>.</mo></mrow></math></p>
+<p>选择多大的<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>K</mi></mrow></math>，取决于偏差与方差之间的权衡。<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>K</mi></mrow></math>越小，模型越flexible，偏差越小，但同时方差也越大；反之则反之。后面会讨论一些计算测试误差率的方法，这些方法可用于<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>K</mi></mrow></math>的选择。</p>
+<p>到底是选择参数化的线性模型还是非参数方法（比如KNN）呢？一个简单的原则是，当实际模型接近线性时，就采用线性模型。可以证明，对于变量个数较少的情况，当模型的非线性程度增加时，非参数方法的test MSE只有微小变化，而参数化线性模型的test MSE却大大增加。换句话说，当真实关系为线性时，KNN比线性模型稍差；但当真实关系为非线性时，KNN却比线性模型好很多。这个特征会导致一种倾向，就是“KNN应该优先选用”，然而，实际上这并不对。主要问题在于，当模型维数（自变量个数）增加时，即使真实关系为非线性，KNN的表现也会比线性模型糟糕得多。原因就是著名的“<strong>维数灾难</strong>”。事实上，即使在p较小时，我们一般也会由于便于解释等原因而倾向于选用线性模型（愿意牺牲一点预测准确性）。</p>
 </body>
 </html>
