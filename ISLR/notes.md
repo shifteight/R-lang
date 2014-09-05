@@ -136,7 +136,40 @@ $$\hat{f}(x_0) = \frac{1}{K}\sum_{x_i\in \mathbb{N}_0} y_i.$$
 当响应变量为定性（类别）变量时，线性回归就不适用了。此时要用专门的分类方法。
 
 ## Logistic回归 ##
+考虑Default数据集，其中，应变量default表示两个类别：Yes或者No。Logistic回归对Y属于某个类别的概率进行建模。比如，给定balance的值，default的概率表示为$\mathrm{Pr(default}=\mathrm{Yes}\mid \mathrm{balance)}$，简记为$p(\mathrm{balance})$。为了方便，我们采用0/1编码，也就是说我们想考察$p(X)=\Pr(Y=1\mid X)$与$X$之间的关系。为了确保概率值位于0和1之间，我们取如下**logistic函数**：
+$$p(X)=\frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}}.$$
+稍加变换：
+$$\frac{p(X)}{1-p(X)}=e^{\beta_0 + \beta_1 X}.$$
+其中，左边称为**几率**（odds）。再取对数：
+$$\log(\frac{p(X)}{1-p(X)})=\beta_0 + \beta_1 X.$$
+左边称为**对数几率**（log-odds，简称logit）。可以看到，logit是X的线性函数。
+
+logistic回归的参数估计一般采用最大似然法（maximum likelihood），选择系数$\beta_0,\beta_1$，使下面的似然函数最大：
+$$\ell (\beta_0, \beta_1)=\prod_{i:y_i=1}p(x_i)\prod_{i':y_{i'}=0}(1-p(x_{i'})). $$
+与线性回归的$t$-统计量类似，logistic回归计算$z$-统计量（系数估计与其标准误之比），如果$z$的绝对值较大，拒绝$H_0$。回归中的截距项主要是用来规范概率值的，一般不作考虑。一旦系数估计出来，就可用于预测。
+
+多元logistic回归过程类似。然而，需要注意**confounding**现象。
 
 ## 线性判别分析 ##
+概括而言，logistic回归是**直接**对条件概率进行建模。而判别分析是一种**间接**的方法，主要基于Bayes原理。具体来说，先对Y取不同值条件下X的分布建模，然后使用Bayes定理反转概率。如果X的条件分布是正态的，可以证明此时的模型与logistic回归很接近。
+
+（TODO：为什么需要判别分析，它相对于logistic回归有什么好处？）
+
+假定有$K$个可能类别。令$\pi_k$表示一个观测来自类别$k$的总体（overall）概率，一般称这个概率为先验概率（prior）。令$f_k(X)\equiv\Pr(X=x\mid Y=k)$表示来自$k$类别的观测的密度函数。它衡量的是，某个属于$k$类的观测之自变量值接近$x$的概率。根据Bayes定理：
+$$\Pr(Y=k\mid X=x)=\frac{\pi_k f_k(x)}{\sum_{l=1}^K \pi_l f_l(x)}.$$
+与前面的记法保持一致，我们一般将上面的条件概率写成$p_k(X)$的形式。接下来要做的是，估计$\pi_k$和$f_k(X)$，然后将它们代入上面的公式。当我们拥有$Y$的一个随机样本，计算$\pi_k$很容易，只要基于训练集计算相应的比例即可。然而，估计$f_k(X)$可没这么简单了，除非我们对那些密度函数的形式做些简单的假定。一般称$p_k(x)$为一个满足$X=x$的观测属于类别$k$的后验概率（posterior）。我们知道，Bayes分类器具有最低的错误率。因此，如果能找到一种方法估计出$f_k(X)$，我们就拥有一个近似于Bayes的分类器。
+
+先看$p=1$的情况。
+
+
 
 ## K-近邻 ##
+
+# Resampling Methods #
+
+最常用的重抽样方法包括交叉验证（cross-validation）和自举（bootstrap）。交叉验证常用于模型评估（model assessment）和模型选择（model selection）。
+
+## 交叉验证
+
+# 线性模型选择与正则化
+
