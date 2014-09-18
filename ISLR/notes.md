@@ -488,4 +488,42 @@ boosting包含三个调节参数：
 
 # 支持向量机
 
+## 最大间隔分类器
+$p$维空间的超平面定义为：
+$$\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_pX_p=0$$
+考虑一个$n\times p$数据矩阵$\mathbf{X}$：
+$$x_1=\left(
+\begin{array}{c}
+x_{11} \\
+\vdots \\
+x_{1p}
+\end{array}
+\right),\cdots,x_n=\left(
+\begin{array}{c}
+x_{11} \\
+\vdots \\
+x_{1p}
+\end{array}
+\right)
+$$
+所有的观测属于两个类别，即$y_1,\cdots,y_n\in \{-1,1\}$。某个测试数据为$x^*=\left(x_1^*,\cdots,x_p^*\right)^T$。我们采用分离超平面的方法来学习一个分类器。假定存在一个超平面能完全分离这些训练数据。分离超平面具有下面的性质：
+$$y_i(\beta_0+\beta_1 x_{i1}+\beta_2 x_{i2}+\cdots+\beta_p x_{ip})>0,i=1,\cdots,n.$$
+如果分离超平面存在，分类器构造就非常自然了，只要看$f(x^*)=\beta_0+\beta_1x_1^*+\cdots+\beta_px_p^*$的符号即可。可以发现，这样的分离超平面可能有无数个，如何选择最优的一个呢？这就是最大间隔超平面（maximal margin hyperplane）。求解下面的最优化问题：
 
+$$
+\begin{eqnarray}
+&& \max_{\beta_0,\beta_1,\cdots,\beta_p} M \\
+&& \mathrm{s.t.} \\
+&& \sum_{j=1}^p \beta_j^2 =1, \\
+&& y_i(\beta_0 + \beta_1 x_{i1}+\beta_2x_{i2}+\cdots+\beta_px_{ip})\geq M, \forall i=1,\cdots,n.
+\end{eqnarray}
+$$
+
+
+
+
+# 非监督学习
+
+## 主成分分析
+
+## 聚类方法
