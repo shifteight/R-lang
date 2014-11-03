@@ -35,3 +35,17 @@ ggplot(subset(data1, Clicks>0),
        aes(x=agecat, y=Clicks, fill=agecat)) + geom_boxplot()
 ggplot(subset(data1, Clicks>0),
        aes(x=Clicks, colour=agecat)) + geom_density()
+
+
+# create categories
+data1$scode[data1$Impressions==0] <- "NoImps"
+data1$scode[data1$Impressions >0] <- "Imps"
+data1$scode[data1$Clicks >0] <- "Clicks"
+
+# Convert the column to a factor
+data1$scode <- factor(data1$scode)
+head(data1)
+
+# look at levels
+clen <- function(x){c(length(x))}
+etable<-summaryBy(Impressions~scode+Gender+agecat, data = data1, FUN=clen)
