@@ -44,7 +44,7 @@ slot_display <- function(prize) {
   string <- paste(symbols, prize, sep = "\n$")
 
   # display regular expression in console without quotes
-  cat(string)
+  cat(paste(string, '\n', sep=""))
 }
 
 print.slots <- function(x, ...) {
