@@ -1,0 +1,333 @@
+Errata
+
+- 16 submitted: last submission 22 Jan 2015 
+
+Errata type: grammar | Page number: 39
+
+The load() command will recreate any data structures already saved that were to an .RData file.
+
+Should be
+
+The load() command will recreate any data structures that were already saved to an .RData file.
+
+ 
+
+Errata type: Technical | Page number: 45
+
+For example, to calculate the mean income in a group of three people with incomes of $35,000, $45,000, and $55,000 we could type:
+
+Should be
+
+For example, to calculate the mean income in a group of three people with incomes of $36,000, $44,000, and $56,000 we could type:
+
+ 
+
+Errata type: Typo | Page number: 51
+
+For example, recall that the IQR for the price variable was 3909...
+
+Should be
+
+For example, recall that the IQR for the price variable was 3905...
+
+ 
+
+Errata type: Grammar | Page number: 14
+
+Toward this end, the algorithm will employ heuristics, or educated guesses about the where to find the most important concepts.
+
+Should be
+
+Toward this end, the algorithm will employ heuristics, or educated guesses about where to find the most important concepts.
+
+ 
+
+Errata type: Grammar | Page number: 105
+
+If we print() the corpus we just created, we will see that it ...
+
+Should be
+
+If we print the corpus we just created using print() function,....
+
+ 
+
+Errata type: Typo | Page number: 27
+
+spam message might use the phrase "free ringtones."
+
+Should be
+
+spam message might use the phrase "free ringtones".
+
+ 
+
+Errata type: Typo | Page number: 80
+
+Understanding Data, we will split the wcbd_n data frame into the wbcd_train and wbcd_test data frames:
+
+Should be
+
+Understanding Data, we will split the wbcd_n data frame into the wbcd_train and wbcd_test data frames:
+
+ 
+
+Errata type: code | Page number: 41
+
+> mydb <- odbcConnect("my_dsn", uid = "my_username" pwd = "my_password")
+
+Should be
+
+> mydb <- odbcConnect("my_dsn", uid = "my_username", pwd = "my_password")
+
+ 
+
+Errata type: Technical | Page number: 93
+
+The line : We know that 20 percent of all messages were spam (the left circle), and 5 percent of all messages contained spam (the right circle).
+
+Should be
+
+We know that 20 percent of all messages were spam (the left circle) and 5 percent of all messages contained the word Viagra (the right circle).
+
+ 
+
+Errata type: Technical| Page number: 132
+
+The line: To better understand how this function works, note that order(c(0.5, 0.25, 0.75, 0.1)) returns the sequence 4 1 2 3 because the smallest number (0.1) appears fourth, the second smallest (0.25) appears first, and so on.
+
+Should be
+
+To better understand how this function works, note that order(c(0.5, 0.25, 0.75, 0.1)) returns the sequence 4 2 1 3 because the smallest number (0.1) appears fourth, the second smallest (0.25) appears second, and so on.
+
+ 
+
+Errata type: Technical | Page number: 194
+
+The line: Install the rpart package using the install.packages(rpart) command. It can then be loaded into your R session using the command library("rpart").
+
+Should be
+
+Install the rpart package using the install.packages("rpart") command. It can then be loaded into your R session using the command library(rpart).
+
+ 
+
+Errata type: Technical| Page number: 178
+
+In Line 4: type install packages("psych")
+
+Should be:
+
+type install.packages("psych")
+
+ 
+
+Errata type: Technical | Page number: 258
+
+In the table of the page, the example code should be:
+
+groceryrules <- apriori(groceries, parameter = list(support = 0.006,confidence = 0.25, minlen = 2))
+inspect(groceryrules[1:3])
+
+ 
+
+Errata type: Technical | Page number: 155
+
+The columns in the table indicate the true class of the mushroom while the rows in the table indicate the predicted values.
+
+Should be:
+
+The rows in the table indicate the true class of the mushroom while the columns in the table indicate the predicted values.
+
+ 
+
+The 120 values in the lower-left corner indicate mushrooms that are actually edible but were classified as poisonous. On the other hand, there were zero mushrooms that were poisonous but erroneously classified as edible.
+
+Should be:
+
+The 120 values in the lower-left corner indicate mushrooms that are actually poisonous but were classified as edible. On the other hand, there were zero mushrooms that were edible but erroneously classified as poisonous.
+
+ 
+
+Based on this information, it seems that our 1R rule actually plays it safe—if you avoid unappetizing smells when foraging for mushrooms, you will avoid eating any poisonous mushrooms. However, you might pass up some mushrooms that are actually edible. Considering that the learner utilized only a single feature, we did quite well; the publisher of the next  field guide to mushrooms should be very happy. Still, let's see if we can add a few more rules and  develop an even better classifier.
+
+Should be:
+
+
+According to our 1R rule, if you avoid unappetizing smells when foraging for mushrooms, you will almost always avoid a trip to the hospital. Considering the simplicity of this rule, the accuracy is quite surprising. However, the publisher of the field guide to mushrooms may not be happy about the fact that some of its readers may fall ill, not to mention the possibility of a lawsuit! Let's see if we can add a few more rules and develop an even better classifier.
+
+ 
+
+Errata type: Technical | Page number: 320
+
+Regarding the k-fold cross validation, as mentioned in book, to create a train data set we are using credit[folds$Fold01,] and for test data credit[-folds$Fold01,]. These assignments 
+should be opposite as training data must be 90% and test data must be 10% for each of the k-iterations. Similarly, for function(x) used to create cv_results, test and train assignments should be opposite to that mentioned in book.
+
+ 
+
+Errata type: Grammar | Page number: 153
+
+I you would like to model the relationship between the class y and predictors x1 and 
+x2, you would write the formula as: y ~ x1 + x2.
+
+Should be:
+
+If you would like to model the relationship between the class y and predictors x1 and 
+x2, you would write the formula as: y ~ x1 + x2.
+
+ 
+
+Errata type: Technical | Page number: 133
+
+If your results do not match exactly with the previous ones, 
+ensure that you run the command set.seed(214805) 
+immediately prior to creating the  credit_rand data frame.
+
+Should be:
+
+If your results do not match exactly with the previous ones, 
+ensure that you run the command set.seed(12345) 
+immediately prior to creating the  credit_rand data frame.
+
+ 
+
+Errata type: Technical | Chapter 4 | Page number: 112
+
+The "tm" package used in this chapter has been updated since the book was written. For version 0.5-9 of the tm package, the code is correct.
+ 
+For version 0.5-10 of tm (2014-01-13) and later, the Dictionary() function is no longer needed.
+ 
+The code can therefore be revised:
+> sms_dict <- Dictionary(findFreqTerms(sms_dtm_train, 5))
+Should be:
+> sms_dict <- findFreqTerms(sms_dtm_train, 5) 
+ 
+For the most recent version 0.6 of tm (2014-06-11), the line:
+> sms_dtm <- DocumentTermMatrix(corpus_clean)
+Should be revised to:
+> sms_dtm <- DocumentTermMatrix(tm_map(corpus_clean, PlainTextDocument))
+ 
+ 
+Errata type: Code | Page number: 112
+
+x <- factor(x, levels = c(0, 1), labels = c(""No"", ""Yes""))
+
+should be:
+
+x <- factor(x, levels = c(0, 1), labels = c("No", "Yes"))
+
+ 
+
+Errata type: typo | Page number: 141
+
+classiifed
+
+Should be:
+
+classified
+
+ 
+
+Errata type: Technical | Page number: 98
+
+The equation in the The Laplace estimator section is:
+
+0 / (0 + 0.0099) = 0
+
+It should be:
+
+0 / (0 + 0.00005) = 0
+
+ 
+
+Errata type: Technical | Page number: 109
+
+The text in the second paragraph is:
+
+A general rule is to begin by setting min.freq to a number roughly 10 percent of the number of documents in the corpus; in this case 10 percent is about 40. Therefore, words in the cloud must appear in at least 40 SMS messages.
+
+It should be:
+
+A general rule is to start by setting min.freq to a number roughly 10 percent of the number of documents in the corpus and reducing this number until R warns you that it cannot fit all the words on the cloud. In this example, we can set min.freq as low as 40 before R gives us a warning. Since a frequency of 40 is about 1 percent of the corpus, this means that a word must be found in at least 1 percent of the SMS messages to be included in the cloud.
+
+ 
+
+Errata type: Technical | Page number: 109
+
+The text in the Information box at the end of the page is:
+
+If so, try adjusting the min.freqvalue up, reduce the number of words in the cloud.
+
+It should be:
+
+If so, try increasing the min.freq value to reduce the number of words in the cloud.
+
+ 
+Errata type: Technical | Page number: 54
+
+The Greek letter mu (similar in appearance to an m) denotes the mean of the values…
+
+Should be:
+
+The Greek letter mu (similar in appearance to an m or u) denotes the mean of the values…
+
+ 
+
+Errata type: Code | Page number: 180
+
+ins_model3
+
+Should be:
+
+ins_model
+
+ 
+
+Errata type: Technical | Page number: 13
+
+The left-hand column in the table should be labeled “distance” and the values should be 4.9, 19.6, 44.1, 78.4, and 122.5.
+
+ 
+
+Type: Technical | Page: 250
+
+The data used here was adapted from the Groceries dataset in the Apriori R package.
+
+It should read:
+
+The data used here was adapted from the Groceries dataset in the **arules** R package.
+
+ 
+
+Type: Technical | Page: 125
+
+Consider the following paragraph:
+
+The entropy of a sample of data indicates how mixed the class values are; *if
+there are only two possibilties* the minimum value of 0 indicates that the
+sample is completely homogenous, while 1 indicates the maximum amount of
+disorder. *In general, the maximum amount of entropy is found from log2(n)
+where n is the number of possible outcomes.*
+
+ 
+
+Type: Technical | Page: 163
+
+Additionally, the coldest launch (62 degrees F) had two rings fail, the most of any launch.
+
+Should be:
+
+Additionally, the coldest launch (52 degrees F) had two rings fail, the most of any launch.
+
+ 
+
+Type: Grammar | Page: 244
+
+The last bullet point at the bottom of this page is:
+
+Identifying combinations of behavior that proceed customers dropping their cellular phone service or upgrading their cable television package
+
+It should be:
+
+Identifying combinations of behavior that procede customers dropping their cellular phone service or upgrading their cable television package
+
