@@ -10,7 +10,8 @@ wbcd_test_labels <- wbcd[470:569,1]
 
 require(class)
 wbcd_test_pred <- knn(train=wbcd_train, test=wbcd_test,
-                      cl=wbcd_train_labels, k=27)
+                      cl=wbcd_train_labels, k=21)
 
 require(gmodels)
 CrossTable(x=wbcd_test_labels, y=wbcd_test_pred, prop.chisq=FALSE)
+
