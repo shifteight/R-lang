@@ -1,0 +1,11 @@
+sms_raw <- read.csv('sms_spam.csv', stringsAsFactors=FALSE)
+sms_raw$type <- factor(sms_raw$type)
+
+require(tm)
+sms_corpus <- Corpus(VectorSource(sms_raw$text))
+corpus_clean <- tm_map(sms_corpus, tolower)
+corpus_clean <- tm_map(corpus_clean, removeNumbers)
+corpus_clean <- tm_map(corpus_clean, removeWords, stopwords())
+corpus_clean <- tm_map(corpus_clean, removePunctuation)
+corpus_clean <- tm_map(corpus_clean, stripWhitespace)
+sms_dtm <- DocumentTermMatrix(corpus_clean)
