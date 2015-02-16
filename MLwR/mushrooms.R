@@ -10,5 +10,5 @@ require(RWeka)
 mushroom_1R <- OneR(type ~ ., data=mushrooms)
 summary(mushroom_1R)
 
-require(JRip)
 mushroom_JRip <- JRip(type ~ ., data=mushrooms)
+summary(mushroom_JRip)
