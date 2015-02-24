@@ -26,3 +26,7 @@ concrete_model2 <- neuralnet(strength ~ cement + slag + ash + water
                             data=concrete_train, hidden=5)
 
 plot(concrete_model2)
+
+model_result2 <- compute(concrete_model2, concrete_test[1:8])
+predicted_strength2 <- model_result2$net.result
+cor(predicted_strength2, concrete_test$strength)
