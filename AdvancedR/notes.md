@@ -97,7 +97,9 @@ Table: Missing/out of bounds indices
     smod <- summary(mod)
     smod$adj.r.squared    # 获取R方
 
-子集赋值：取子集与赋值一起使用。此时，要注意几点：
+## 子集赋值
+
+可以通过取子集与赋值一起使用来改变对象内容。此时，要注意几点：
 
 - 不检查重复索引，当索引重复时，取最后一次赋值
 - ``NA``不能在子集赋值中使用，除了与逻辑索引连用，此时作为``FALSE``处理，该方式在根据条件更改向量时非常有用
@@ -123,3 +125,14 @@ Table: Missing/out of bounds indices
     y <- list(a=1)
     y['b'] <- list(NULL)
     str(y)
+
+## 应用实例
+
+### 查询表（字符索引, c.s.）
+### 匹配和手工合并（i.s.）
+### 随机抽样／bootstrap（i.s.）
+### 排序（i.s.）
+### Expanding aggregated counts (i.s.)
+### Removing columns from data frames (c.s.)
+### Selecting rows based on a condition (l.s.)
+### Boolean algebra vs. sets (l.s. & i.s.)
