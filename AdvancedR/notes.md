@@ -131,8 +131,53 @@ Table: Missing/out of bounds indices
 ### 查询表（字符索引, c.s.）
 ### 匹配和手工合并（i.s.）
 ### 随机抽样／bootstrap（i.s.）
+
+    df <- data.frame(x=rep(1:3, each=2), y=6:1, z=letters[1:6])
+    set.seed(10)
+    # randomly reorder
+    df[sample(nrow(df)), ]
+    # select 6 bootstrap replicates
+    df[sample(nrow(df), 6, rep=T), ]  
+    
 ### 排序（i.s.）
+``order()``函数与整数索引结合，可以对对象排序。比如：
+
+    df2 <- df[sample(nrow(df)), 3:1]
+    df2[order(df2$x),]  # 按`x`列排序
+    df2[, order(names(df2))]  # 升序重排各列
+
 ### Expanding aggregated counts (i.s.)
+
+    df <- data.frame(x=c(2,4,1), y=c(9,11,6), n=c(3,5,1))
+    df[rep(1:nrow(df), df$n), 1:2]
+
 ### Removing columns from data frames (c.s.)
+比如，想从一个数据框中移除部分列，可以用三种方式：（1）将想移除的列设为NULL；（2）以单向量索引方式取子集；（3）与（2）类似，但使用``setdiff()``。
+
 ### Selecting rows based on a condition (l.s.)
+一般采用``subset()``函数来简化代码：
+    
+    subset(mtcars, gear==5)
+    subset(mtcars, gear==5 & cyl==4)
+
+注意：逻辑表达式中要用向量布尔操作符``&``和``|``而不是短路操作符``&&``和``||``。``subset()``在non-standard evaluation中还要谈到。
+
 ### Boolean algebra vs. sets (l.s. & i.s.)
+布尔代数（逻辑索引）和集合运算（整数索引）是等价的，但在下面情况下，集合运算更高效：
+
+- 寻找第一或最后一个``TRUE``；
+- 存在很少几个``TRUE``、很多``FALSE``（此时，集合表示更快且占用更少空间）
+
+``which()``函数将布尔表示转化为整数索引，但R base中却没有反过来的操作，可以自己编写一个：
+
+    x <- sample(10) < 4
+    which(x)
+    
+    unwhich <- function(x, n) {
+      out <- rep_len(FALSE, n)
+      out[x] <- TRUE
+      out
+    }
+
+    unwhich(which(x), 10)
+
