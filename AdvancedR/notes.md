@@ -612,7 +612,7 @@ S4提供了一些特殊函数，用来创建新的泛型和方法。``setGeneric
     # From pryr: takes an unevaluated function call
     method_from_call(nobs(fit))
 
-# RC
+## RC
 引用类是R中最新的OO系统（2.12版引入）。RC与S3和S4有本质不同：
 
 - RC方法属于对象，而不是函数；
@@ -679,5 +679,78 @@ RC方法与某个类关联并可以修改类的域（使用``<<-``，in place）
 
 所有的引用类都继承自``envRefClass``。该类提供了一些有用的方法：copy，callSuper, field, export, show, 等等。
 
-# 选择哪个系统？
+## 选择哪个系统？
 一般R编程S3就足够了。S4提供了更复杂的面向对象编程（Matrix包是绝佳范例）。RC类只有当确实需要可修改状态时使用。
+
+# 环境
+所谓环境（environment），就是提供作用域的数据结构。环境具有引用语义，即会被in place修改。
+
+## 基础知识
+环境将一系列名称与一系列值绑定。环境可以想象成一个名称的包裹。其中，每个名称指向存储在内存其他地方的某个对象。对象不在环境中，因此，多个名称可以指向同一个对象。如果某个对象没有名称指向它，将被垃圾收集器自动删除。
+
+每个环境都有一个父环境。父环境用来实现词法作用域：如果某个名称在一个环境中找不到，R将去其父环境查找，如此继续下去。只有一个环境没有父环境：空（empty）环境。
+
+通常情况下，环境与列表类似，有四个例外：
+
+- 环境中每个对象都有唯一名称；
+- 环境中的对象没有顺序；
+- 环境有parent；
+- 环境具有引用语义。
+
+技术上说，环境由frame和父环境两个部分组成。其中，frame包含名称－对象绑定（与named list类似）。但frame在R中的使用并不保持一致，比如，``parent.frame()``并不给出环境的parent frame，而是给出调用（calling）环境。
+
+有四个特殊的环境：
+
+- globalenv()，全局环境，即交互式工作空间。全局环境的父环境是加载的最后一个包；
+- baseenv()，基本环境，即base包的环境，其父环境是空环境；
+- emptyenv()，空环境，是所有环境的终极祖先，唯一一个没有父环境的环境；
+- environment()，表示当前环境。
+
+``search()``列出全局环境的所有父环境，称为搜索路径（search path）。它包含所有加载的包和对象对应的环境，也包含一个特殊的环境``Autoloads``，用于在需要时加载（一般较大的）对象（节约内存）。
+
+可以用``as.environment()``访问搜索列表中的任意环境：
+
+    search()
+    as.environment("package:stats")
+
+几个环境的关系如下：``globalenv()`` --> The search path --> ``baseenv()`` --> ``emptyenv()``。
+
+用``ls()``可以列出环境中所有绑定，默认不列出以`.`开头的名称，加上``all.names=TRUE``将列出所有绑定。``parent.env()``给出父环境。``ls.str()``给出环境中的每个对象。``$``、``[[``、``get()``用来获取某个绑定的值，其中前两个只在一个环境中查找，如果没有绑定，返回NULL，后一个使用通常的作用域规则，如果没有绑定，则报错。移除绑定使用``rm()``。判断某个绑定是否存在用``exists()``，与``get()``类似，默认情况下遵循通常的作用域规则，并会查找父环境（若不需要这种行为，可以加上``inherits=FALSE``参数）。比较环境，用``identical()``（不能用``==``）。
+
+## 环境上的递归
+环境就是一个树结构，因此写递归很容易。``pryr::where()``用来查找某个名称是哪个环境定义的，其源代码如下：
+
+    where <- function(name, env = parent.frame()) {
+      if (identical(env, emptyenv())) {
+        # Base case
+        stop("Can't find ", name, call. = FALSE)
+        
+      } else if (exists(name, envir = env, inherits = FALSE)) {
+        # Success case
+        env
+        
+      } else {
+        # Recursive case
+        where(name, parent.env(env))
+        
+      }
+    }
+
+``where``函数提供了一个写递归函数的模板：
+
+    f <- function(..., env = parent.frame()) {
+      if (identical(env, emptyenv())) {
+        # base case
+      } else if (success) {
+        # success case
+      } else {
+        # recursive case
+        f(..., env = parent.env(env))
+      }
+    }
+
+## 函数环境
+
+## 名称绑定
+
+## 显式环境
