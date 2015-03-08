@@ -412,3 +412,272 @@ replacement可以与subsetting一起使用：
     `*tmp*`[2] <- 'two'
     names(x) <- `*tmp*`
 
+# OO指南
+本章需要用pryr包。
+
+## 基本类型
+每个R对象底层是一个C结构（struct），该struct描述对象在内存中存储情况。
+
+## S3
+S3是最早及最简单的OO系统，base和stat包仅包含这种OO系统，在CRAN中使用最多。S3是非正式但小巧精致。R中多数对象都是S3对象，但判别一个对象是否S3对象却不那么容易，一般你只能用``is.object(x) & !isS4(x)``来判断``x``是一个对象但非S4对象。更容易的方法是使用``pryr::otype()``：
+
+    df <- data.frame(x=1:10, y=letters[1:10])
+    otype(df)    # a data frame is an S3 class
+    otype(df$x)  # a numeric vector isn't
+    otype(df$y)  # a factor is
+
+S3中，方法隶属于泛型函数（generic functions），或简称泛型（generics）。S3方法不属于对象或是类，这点与很多OO语言不同。
+
+为了判别某个函数是否S3泛型，可查看源代码中是否包含``UseMethod()``，该函数负责选择正确的方法调用，这就是所谓的方法分派（method dispatch）。也可以用``pryr::ftype()``来判断函数的类型。
+
+某些S3泛型，比如``[``、``sum()``、``cbind()``，不调用``UseMethod()``，因为它们是用C实现的，调用``DispatchGroup()``或``DispatchOrEval()``函数。采用C方法分派的函数称为内部泛型（internal generics），可用``?"internal generic"``或``pryr::ftype()``查看。
+
+给定一个类，S3泛型的任务是负责调用正确的S3方法。可以通过名称来识别S3方法，一般形式为``generic.class()``。比如，均值泛型``mean()``的Date方法为``mean.Date()``，``print()``的factor方法为``print.factor()``。正由于这个特征，现代风格不鼓励函数名中使用`.`。``methods()``返回某个泛型的所有方法。多数base包之外的S3方法都是不可见的（non-visible），可以用``getS3method()``查看其源代码。也可列出拥有某个给定类的方法的所有泛型：``methods(class='ts')``。
+
+创建S3对象并定义相应类有两种方法：一种是直接用``structure()``或者建立对象后用``class<-()``。S3对象通常建立在列表或带属性的原子向量上。也可将函数转化为S3对象。``class()``给出某个对象的类，``inherits()``判断某个对象是否继承自某个类。
+
+S3对象的类可以是一个向量，比如，``glm()``对象的类是``c("glm", "lm")``，表明广义线性模型继承自线性模型。类名称通常小写。
+
+多数S3类提供一个构造函数，比如：
+
+    foo <- function(x) {
+      if (!is.numeric(x)) stop("X must be numeric")
+      structure(list(x), class='foo')
+    }
+    
+尽可能地使用构造函数，确保创建类包含正确的组件。构造函数通常与类同名。除了开发者提供的构造函数，S3并不检测其正确性，这意味着你可以改变已有对象的类。
+
+构建一个新的泛型，只要创建一个调用``UseMethod()``的函数，包括两个参数：一个作为泛型的名称，一个用于方法分派。不要向``UseMethod()``传递任何参数。比如：
+
+    f <- function(x) UseMethod("f")
+    
+泛型只有添加了方法才有用，添加的方法具有``generic.class``形式：
+    
+    f.a <- function(x) "Class a"
+    
+    a <- structure(list(), class="a")
+    class(a)
+    f(a)
+
+为已有泛型函数添加方法也一样：
+
+    mean.a <- function(x) "a"
+    mean(a)    #> [1] "a"
+
+可以发现，R并不检查方法是否返回与泛型兼容的类。
+
+S3方法分派比较简单。``UseMethod()``创建一个包含函数名称的向量，就像``paste0('generic', '.', c(class(x), 'default'))``，接着按顺序查找。``default``类作为fallback。
+
+    f <- function(x) UseMethod("f")
+    f.a <- function(x) "Class a"
+    f.default <- function(x) "Unknown class"
+    
+    f(structure(list(), class = "a"))
+    #> [1] "Class a"
+    # No method for b class, so uses method for a class
+    f(structure(list(), class = c("b", "a")))
+    #> [1] "Class a"
+    # No method for c class, so falls back to default
+    f(structure(list(), class = "c"))
+    #> [1] "Unknown class"
+  
+组泛型（group generics）有点复杂。四类组泛型如下：
+
+- Math: abs, sign, sqrt, floor, cos, sin, log, exp, …
+- Ops: +, -, *, /, ^, %%, %/%, &, |, !, ==, !=, <, <=, >=, >
+- Summary: all, any, sum, prod, min, max, range
+- Complex: Arg, Conj, Im, Mod, Re
+
+查看``?groupGeneric``获取更多细节。最重要的一点是，上面的Math、Ops、Summary、Complex不是真正的函数，而是代表一组函数（函数组）。组泛型中有个特殊变量``.Generic``给出了真正调用的广义函数。
+
+当类层次较复杂时，经常需要调用父方法（parent method），参考``?NextMethod``。
+
+注1: UseMethod() calls methods in a special way.
+    
+    y <-1
+    g <- function(x) {
+      y <- 2
+      UseMethod("g")
+    }
+    g.numeric <- function(x) y
+    g(10)  #> [1] 2
+    
+    h <- function(x) {
+      x <- 10
+      UseMethod("h")
+    }
+    h.character <- function(x) paste("char", x)
+    h.numeric <- function(x) paste("num", x)
+    h("a")  #> [1] "char a"
+
+注2： Internal generics don’t dispatch on the implicit class of base types.
+    
+    f <- function() 1
+    g <- function() 2
+    class(g) <- "function"
+    
+    class(f)
+    class(g)
+    
+    length.function <- function(x) "function"
+    length(f)
+    length(g)
+## S4
+识别S4对象、泛型和方法比较容易：对于S4对象，``str()``返回“formal” class，``isS4()``返回``TRUE``，``pryr::otype()``返回``S4``；S4泛型和方法就是定义了类的S4对象。``stats4``包提供了S4类。
+
+    # From example(mle)
+    y <- c(26, 17, 13, 12, 20, 5, 9, 8, 5, 4, 8)
+    nLL <- function(lambda) - sum(dpois(y, lambda, log = TRUE))
+    fit <- mle(nLL, start = list(lambda = 5), nobs = length(y))
+    
+    # An S4 object
+    isS4(fit)
+    otype(fit)
+    
+    # An S4 generic
+    isS4(nobs)
+    ftype(nobs)
+    
+    # Retrieve an S4 method
+    mle_nobs <- method_from_call(nobs(fit))
+    isS4(mle_nobs)
+    ftype(mle_nobs)
+
+使用``is()``带一个参数，列出某个对象继承的所有类；带两个参数，测试某个对象是否继承自某个类。
+
+    is(fit)
+    is(fit, "mle")
+
+可以用``getGenerics()``获得所有S4泛型的列表，用``getClasses()``返回所有S4类。``showMethods()``列出所有S4方法（可用``generic``或``class``限制输出。也可以用``where=search()``限制搜索范围。
+
+S3中可通过设定class属性将某个对象转化为某个特定类的对象，而在S4中则更加严格：必须用``setClass()``定义一个类的表示，然后用``new()``创建新对象。查询类文档用下面的特殊语法：``class?className``，比如，``class?mle``。
+
+S4类具有三个关键性质：
+
+- 名称（name）：alpha-numeric，UpperCamelCase 
+- 槽（named slots）的命名列表，槽也叫域（fields）：定义了槽的名称和允许的类。比如，一个person类：``list(name="character", age="numeric")``
+- contains：一个表示继承（包含）关系的字符串
+
+在``slots``和``contains``中可以使用S4类、用``setOldClass()``注册过的S3类或基本类型的隐含类。此外，在``slots``中可以使用特殊类``ANY``，即对输入不加限制。
+
+S4类的其他性质包括：``validity``方法，``prototype``对象，``?setClass``有更多细节。
+
+    ＃ Create S4 classes and objects
+    setClass("Person",
+             slots = list(name = "character", age = "numeric"))
+    setClass("Employee",
+             slots = list(boss = "Person"),
+             contains = "Person")
+    
+    alice <- new("Person", name = "Alice", age = 40)
+    john <- new("Employee", name = "John", age = 20, boss = alice)
+
+注：多数S4类带有一个同名构造函数，如果有，就用它取代``new()``创建对象。
+
+``@``（相当于``$``）或``slot()``（相当于``[[``），用于获取S4对象的槽：比如，``alice@age``或``slot(john, "boss")``。
+
+如果某个S4对象继承自S3类或基本类型，它将具有一个特殊的``.Data``槽，其中包含背后的基本类型或S3对象。比如：
+
+    setClass("RangedNumeric",
+             contains="numeric",
+             slots=list(min="numeric", max="numeric"))
+    rn <- new("RangedNumeric", 1:10, min=1, max=10)
+    rn@min
+    rn@.Data
+
+S4提供了一些特殊函数，用来创建新的泛型和方法。``setGeneric()``创建一个新泛型或者将已有函数转化为泛型。``setMethod()``具有三个参数：泛型名，与方法关联的类，以及实现方法的函数。比如，可以让``union()``适用于data frame：
+
+    # Make union() work with data frames
+    setGeneric("union")
+    setMethod("union",
+              c(x="data.frame", y="data.frame"),
+              function(x, y) {
+                unique(rbind(x, y))
+              }
+    )
+
+如果要从头开始创建泛型，需要提供一个调用``standardGeneric()``的函数：
+
+    setGeneric("myGeneric", function(x) {
+      standardGeneric("myGeneric")
+    })
+
+其中，``standardGeneric()``相当于S3中的``UseMethod()``。
+
+如果S4泛型在单个具有单父类的类上进行分派，则分派机制与S3一样。主要区别在于如何设定缺省值：S4使用特殊类``ANY``匹配任何类，使用"missing"匹配缺失参数。与S3类似，S4也有组泛型，也可用``callNextMethod()``调用父方法。多参数或多继承情形下的分派机制要复杂得多，参考``?Methods``。最后，有两个方法来判断那个方法被调用了：
+
+    # From methods: takes generic name and class names
+    selectMethod("nobs", list("mle"))
+    
+    # From pryr: takes an unevaluated function call
+    method_from_call(nobs(fit))
+
+# RC
+引用类是R中最新的OO系统（2.12版引入）。RC与S3和S4有本质不同：
+
+- RC方法属于对象，而不是函数；
+- RC对象是可修改的：通常的copy-on-modify语义不适用。
+
+这些特点使得RC与其他OO语言更加接近。RC是用R代码实现的，就是一个特定S4类。
+
+创建一个RC类，使用``setRefClass()``，第一个（必需的）参数是name（alphanumeric）。你可以使用``new()``创建新的RC对象，但更好的风格是用``setRefClass()``返回的对象来生成新的对象。
+
+    Account <- setRefClass("Account")
+    Account$new()
+
+``setRefClass()``也接受一个name-class对的列表，该列表定义了类的域（fields），``new()``的额外参数给定域的初始值。``$``获取和设定域的值：
+
+    Account <- setRefClass("Account",
+                           fields=list(balance="numeric"))
+    a <- Account$new(balance=100)
+    a$balance
+    a$balance <- 200
+    a$balance
+
+RC对象是可修改的，具有引用语义，因此，RC对象带有一个``copy()``方法：
+
+     c <- a$copy()
+     c$balance    # 0
+     a$balance <- 100
+     c$balance    # 0, no change
+
+RC方法与某个类关联并可以修改类的域（使用``<<-``，in place）。
+
+    Account <- setRefClass("Account",
+                           fields = list(balance = "numeric"),
+                           methods = list(
+                             withdraw = function(x) {
+                               balance <<- balance - x
+                             },
+                             deposit = function(x) {
+                               balance <<- balance + x
+                             }
+                           )
+    )
+    
+    a <- Account$new(balance = 100)
+    a$deposit(100)
+    a$balance
+
+``setRefClass()``还有一个重要参数是``contains``，表示继承的父类。下面创建一种不能透支的银行账户（作为Account的子类）。
+
+    NoOverdraft <- setRefClass("NoOverdraft",
+                               contains = "Account",
+                               methods = list(
+                                 withdraw = function(x) {
+                                   if (balance < x) stop("Not enough money")
+                                   balance <<- balance - x
+                                 }
+                               )
+    )
+    accountJohn <- NoOverdraft$new(balance = 100)
+    accountJohn$deposit(50)
+    accountJohn$balance
+    #> [1] 150
+    accountJohn$withdraw(200)
+    #> Error in accountJohn$withdraw(200): Not enough money
+
+所有的引用类都继承自``envRefClass``。该类提供了一些有用的方法：copy，callSuper, field, export, show, 等等。
+
+# 选择哪个系统？
+一般R编程S3就足够了。S4提供了更复杂的面向对象编程（Matrix包是绝佳范例）。RC类只有当确实需要可修改状态时使用。
