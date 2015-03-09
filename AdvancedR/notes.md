@@ -750,7 +750,89 @@ RC方法与某个类关联并可以修改类的域（使用``<<-``，in place）
     }
 
 ## 函数环境
+多数环境不是用户用``new.env()``创建的，而是使用函数时创建的。与函数相关的环境有四类：
+
+- 包含（enclosing）环境：函数创建时的环境，有且仅有一个
+- 绑定（binding）环境：用``<-``绑定函数至名称时定义的环境
+- 执行（execution）环境：调用函数时创建的临时环境，用于保存执行过程中欧给你的变量
+- 调用（calling）环境：每一个执行环境关联一个调用环境，用于说明函数在哪里被调用
+
+对于后三种类型，每个函数可以关联0，1或多个环境。
+
+``environment()``返回函数的包含环境。有时，包含环境和绑定环境是一样的，但当你重新绑定函数时，绑定环境可能发生变化；包含环境从属于函数，即使函数移动到另一个环境，它的包含环境也不会改变。总之，包含环境决定了函数如何寻找值，而绑定环境决定了我们如何寻找函数。两者的区别对于包名称空间非常重要。比如，假定包A用到base包的``mean()``函数，而包B创建了自己的``mean()``函数，会发生什么？名称空间能保证包A继续使用base包的mean，而不受包B的影响。名称空间是用环境实现的，基于这样一个事实：函数并不存在在于其包含环境中。以base包的``sd``函数为例，其绑定环境和包含环境是不一样的：
+
+    environment(sd)
+    where("sd")
+
+``sd()``函数定义用到``var()``函数，但如果我们创建一个新的``var()``函数，对``sd()``并无影响。其中的机理如下：每个package都有两个环境与之关联，一个package环境，一个namespace环境。package环境包含所有公有函数，置于搜索路径之上；namespace环境包含所有的函数（包括内置函数），其父环境是一个特殊的imports环境（包含包所需函数的绑定）。包的每个输出函数绑定（bound）至package环境，但包含（enclosed）在namespace环境。
+
+函数的执行环境是临时的，函数返回时，执行环境消失。当在一个函数中调用另一个函数，子函数的包含环境就是父函数的执行环境，且该执行环境不再是临时的。下面给出一个函数工厂（factory）的例子：
+
+    plus <- function(x) {
+      function(y) x + y
+    }
+    plus_one <- plus(1)
+    identical(parent.env(environment(plus_one)), environment(plus))
+    #> [1] TRUE
+
+``parent.frame()``（这个名字起得不好）得到函数的调用环境。下面的代码分别获取两个不同的``x``：
+
+    f <- function() {
+      x <- 10
+      function() {
+        def <- get("x", environment())
+        cll <- get("x", parent.frame())
+        list(defined = def, called = cll)
+      }
+    }
+    g <- f()
+    x <- 20
+    str(g())
+    #> List of 2
+    #>  $ defined: num 10
+    #>  $ called : num 20
+
+更复杂的情况下，可能不止一个父调用，而是一系列调用串联至从顶层调用的初始函数。下面的例子给出三层call stack
+
+    x <- 0
+    y <- 10
+    f <- function() {
+      x <- 1
+      g()
+    }
+    g <- function() {
+      x <- 2
+      h()
+    }
+    h <- function() {
+      x <- 3
+      x + y
+    }
+    f()
+    #> [1] 13
+
+注意每个执行环境有两个父环境：一个calling环境和一个enclosing环境。R通常的作用域规则只使用enclosing环境；``parent.frame()``允许你访问calling parent。在calling环境而不是enclosing环境查找变量，成为动态作用域（dynamic scoping）（详见“非标准求值”部分）。
 
 ## 名称绑定
+常规赋值``<-``总是在当前环境中创建一个变量。深赋值``<<-``从不在当前环境中创建变量，而是修改一个已有的变量（向父环境追溯）。深绑定也可用``assign()``，实际上，``<<-``就相当于``assign("name", value, inherits=TRUE)``。``<<-``常常与闭包一起使用。还有两类特殊绑定，延迟（delayed）绑定和活跃（active）绑定：
+
+- delayed binding：创建并保存一个promise，在需要时求值。可以用``pryr``包的``%<d-%``赋值符创建延迟绑定（``%<d-%`` is a wrapper around the base ``deayledAssign()`` function）。
+- active binding：绑定的不是常对象，每次被访问时都将重新求值。可以用``pryr``包的``%<a-%``创建（``%<a-%`` is a wrapper for ``makeActiveBinding()``）。
 
 ## 显式环境
+除了提供作用域规则，环境本身也是非常有用的数据结构，因为它们具有引用语义。看下面的函数：
+
+    modify <- function(x) {
+      x$a <- 2
+      invisible()
+    }
+
+如果将``modify()``应用于列表，原有的列表不被修改；但如果应用于环境，就会修改原环境：
+
+    x_e <- new.env()
+    x_e$a <- 1
+    modify(x_e)
+    x_e$a
+    #> [1] 2
+
+
