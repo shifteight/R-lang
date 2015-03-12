@@ -100,3 +100,62 @@ funs <- list(
 
 lapply(funs, function(f) f(x))
 lapply(funs, function(f) f(x, na.rm=TRUE))
+
+# scale a vector to range [0,1]
+scale01 <- function(x) {
+  rng <- range(x, na.rm=TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+
+# fit linear models using different formulas
+formulas <- list(
+  mpg ~ disp,
+  mpg ~ I(1 / disp),
+  mpg ~ disp + wt,
+  mpg ~ I(1 / disp) + wt
+)
+
+lapply(formulas, function(f) lm(f, data=mtcars))
+
+# multiple inputs: Map (mapply)
+
+# generate some sample data
+xs <- replicate(5, runif(10), simplify = FALSE)
+ws <- replicate(5, rpois(10, 5) + 1, simplify = FALSE)
+# unweighted mean
+unlist(lapply(xs, mean))
+# weighted mean
+unlist(Map(weighted.mean, xs, ws))
+
+# smooth data using a rolling mean function
+rollmean <- function(x, n) {
+  out <- rep(NA, length(x))
+  
+  offset <- trunc(n / 2)
+  for (i in (offset + 1):(length(x) - n + offset + 1)) {
+    out[i] <- mean(x[(i - offset):(i + offset - 1)])
+  }
+  out
+}
+x <- seq(1, 3, length=1e2) + runif(1e2)
+plot(x)
+lines(rollmean(x, 5), col="blue", lwd=2)
+lines(rollmean(x, 10), col="red", lwd=2)
+
+# data with more variable noise, using median instead of mean
+x <- seq(1, 3, length = 1e2) + rt(1e2, df = 2) / 3
+plot(x)
+lines(rollmean(x, 5), col = "red", lwd = 2)
+
+rollapply <- function(x, n, f, ...) {
+  offset <- trunc(n / 2)
+  locs <- (offset + 1):(length(x) - n + offset + 1)
+  num <- vapply(
+    locs,
+    function(i) f(x[(i - offset):(i + offset)], ...),
+    numeric(1)
+  )
+  c(rep(NA, offset), num)
+}
+plot(x)
+lines(rollapply(x, 5, median), col="red", lwd=2)
