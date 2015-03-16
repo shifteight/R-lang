@@ -1,0 +1,26 @@
+usa.def
+
+gdp inf F B
+
+  Obs: 104, quarterly, (1984:1 - 2009.4)  
+
+	gdp : real US gross domestic product
+
+        inf : annual inflation rate
+	
+	F   : Federal Funds rate
+
+	B   : 3-year Bond rate
+
+
+Source: Federal Reserve Economic Data, Federal Reserve Bank of St.Louis
+
+ 
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         gdp |       104    8616.318    3313.988     3807.4    14484.9
+         inf |       104     5.08625    3.099548       1.28      13.55
+           f |       104    4.983846    2.568505        .12      11.39
+           b |       104    5.697115    2.483198       1.27      12.64
+
+        

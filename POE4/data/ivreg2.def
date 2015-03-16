@@ -1,0 +1,19 @@
+ivreg2.def
+
+ x y z1 z2 
+  
+  Obs:   500 observations artificially generated
+
+
+x               explanatory variable
+y               dependent variable
+z1              instrument 1
+z2              instrument 2
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           x |       500    .0289567    1.441686   -4.43988    4.32846
+           y |       500    3.060344    2.229646   -3.57632   10.16687
+          z1 |       500   -.0004661    1.010363   -2.82281     3.1517
+          z2 |       500   -.0442213    1.011584   -3.18806    3.19265

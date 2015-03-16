@@ -1,0 +1,18 @@
+mexico.def
+
+mexico usa 
+
+  Obs: 107, quarterly, (1980:1 - 2006.3)  
+
+	mexico   : real GDP of Mexico   (standardised value of 100 in 2000)
+
+        usa      : real GDP of the U.S. (standardised value of 100 in 2000)
+	
+	
+Data Source: International Financial Statistics, International Monetary Fund
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      mexico |       107     80.34845    16.66097     57.61231    116.1908
+         usa |       107     80.06840    19.16961     52.02600    116.5690

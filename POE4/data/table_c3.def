@@ -1,0 +1,13 @@
+table_c3.def
+
+ y
+
+  Obs:   30 observations from N(10,10) population
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           y |        30    10.20593    3.033038      2.439     14.921
+
+

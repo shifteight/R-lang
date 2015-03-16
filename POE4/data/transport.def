@@ -1,0 +1,23 @@
+transport.def
+
+autotime  bustime   dtime  auto
+  
+	Obs:   21 
+	
+	autotime	commute time via auto, minutes
+	bustime		commute time via bus, minutes
+	dtime		=(bus time - auto time)/10, 10 minute units
+	auto		= 1 if auto chosen
+	
+Data source: Ben-Akiva and Lerman, Discrete choice analysis, 1985, MIT Press 
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+    autotime |        21    49.34762    32.43491         .2       99.1
+     bustime |        21    48.12381    34.63082        1.6       91.5
+       dtime |        21    -.122381    5.691037      -9.07        9.1
+        auto |        21    .4761905    .5117663          0          1
+
+

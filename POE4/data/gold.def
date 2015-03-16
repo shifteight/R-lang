@@ -1,0 +1,16 @@
+gold.def
+
+ gold
+
+  Obs: 200, daily (Dec 13, 2005 to Sept 18, 2006)  
+
+ 	gold: returns to shares to a company specialising in gold bullions   
+
+              
+Data source: http://au.finance.yahoo.com   
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        gold |       200    .0255093    .6647556  -2.802872   1.257098

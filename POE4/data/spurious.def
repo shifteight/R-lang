@@ -1,0 +1,18 @@
+spurious.def
+
+rw1 rw2
+
+  Obs: 700  
+  
+	rw1: random walk process
+
+        rw2: random walk process
+
+Data Source: generated time series data
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         rw1 |       700     39.44163    15.74242     4.805635    64.45106
+         rw2 |       700     25.67996    15.69695    -4.956500    49.20347

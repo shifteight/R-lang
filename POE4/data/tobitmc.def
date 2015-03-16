@@ -1,0 +1,33 @@
+tobitmc.def
+
+b1 b2 sighat b1plus b2plus sigplus beta1 beta2 sig
+  
+	Obs:   1000 
+	
+	b1		ols estimate of intercept based on full sample
+	b2		ols estimate of slope based on full sample
+	sighat		esitmate of standard deviation based on b1 and b2
+	b1plus		ols estimate of intercept based on positive y
+	b2plus		ols estimate of slope based on positive y
+	sigplus		esitmate of standard deviation based on b1plus and b2plus
+	beta1		tobit estimate of intercept
+	beta2		tobit estimate of slope
+	sig		tobit estimate of standard deviation
+	
+	
+Data source: Simulated data
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          b1 |      1000   -2.046498    .2237578   -2.69786   -1.20142
+          b2 |      1000    .5434253    .0350952     .41165     .64714
+      sighat |      1000    2.932346     .167463    2.43965    3.49384
+      b1plus |      1000   -1.919428    .9419284   -6.47327     .76467
+      b2plus |      1000    .5853927    .0738566     .36712     .87843
+-------------+--------------------------------------------------------
+     sigplus |      1000    3.328151    .2334954    2.67113    4.33296
+       beta1 |      1000   -9.060031    1.024818   -13.2168   -6.11465
+       beta2 |      1000    1.003933    .0775568     .74907    1.27154
+         sig |      1000    3.981325    .2798999    3.22667    5.28081

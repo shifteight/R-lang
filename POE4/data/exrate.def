@@ -1,0 +1,18 @@
+exrate.def
+
+ s
+
+
+  Obs: 240, monthly (January 1985 - December 2004)  
+
+	  s : changes in the $US/$A exchange rate
+
+Data source: Reserve Bank of Australia: Statistical Bulletins
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        s    |       240    .0253169    3.108473  -8.852538   13.25853
+
+
+              

@@ -1,0 +1,18 @@
+sp.def
+
+  r
+  
+  Obs: 781, weekly, (1.08.1990 - 12.20.2004)
+
+	r: returns to US S&P500 
+
+Data Source: http://au.finance.yahoo.com  
+
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         r   |       781    .1582282    2.147897  -11.70971   7.492266
+
+              

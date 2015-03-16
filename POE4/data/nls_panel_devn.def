@@ -1,0 +1,29 @@
+nls_panel_devn.def
+
+  lw_dev  exp_dev  exp2_dev  ten_dev  ten2_dev  union_dev 
+
+   obs:  50 
+
+(This file contains a subset of the variables in the file nls_panel10, expressed in terms of deviations from individual means.)
+
+	lw_dev 	  = ln(wage/GNP deflator) - average of [ln(wage/GNP deflator)] for the i-th individual
+	exp_dev	  = total work experience - average of [total work experience] for the i-th individual
+	exp2_dev  = square of total work experience - average of [total work experience squared] for the i-th individual		ten_dev	  = job tenure, in years - average of [job tenure] for the i-th individual
+	ten2_dev  = job tenure squared - average of [job tenure squared] for the i-th individual
+	union_dev = 1 (if union memeber) or 0 (if not union member) - average of 1's and 0's for i-th individual
+	
+	
+Source: Subset of NLSWORK.DTA, Stata Corp. 2005. Stata Statistical Software: Release 9. College Station, TX: Stata Corp LP.
+        The authors wish to thank the Stata Corporation for allowing the use of the data.
+	
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      lw_dev |        50    2.83e-18    .2643443  -.8445444   1.055708
+     exp_dev |        50   -1.48e-17     2.26546  -3.092308   3.369232
+    exp2_dev |        50    2.58e-16    58.50121  -93.17334   111.1935
+     ten_dev |        50   -4.86e-18    2.130799  -3.583334   3.383334
+    ten2_dev |        50   -3.42e-16    39.09372  -91.27776   111.3819
+-------------+--------------------------------------------------------
+   union_dev |        50           0    .2857143        -.6         .8
+

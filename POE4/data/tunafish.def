@@ -1,0 +1,43 @@
+tunafish_small.def
+
+hhid      alt       br1       br2       br3       br4       choice    display   feature   income    netprice
+
+
+  OBS: 6000 (1500 transactions of 4 choices)
+  
+
+hhid            household occasion
+alt             alternative brands
+br1             =1 if Skist-water
+br2             =1 if Skist-oil
+br3             =1 if ChiSea-water
+br4             =1 if ChiSea-oil
+choice          =1 if purchased
+display         =1 if the brand was on special display
+feature         =1 if the brand was featured in sales paper
+income          household income, $1000
+netprice        price - coupon value if a coupon were used
+
+
+Data Source: Source: ERIM public data base, James M. Kilts Center, University of Chicago Booth School of Business
+                     Thanks to Dr. Danny Weathers, Marketing Department, LSU for providing data file.
+                     
+             
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        hhid |      6000       750.5    433.0487          1       1500
+         alt |      6000         2.5    1.118127          1          4
+         br1 |      6000         .25    .4330488          0          1
+         br2 |      6000         .25    .4330488          0          1
+         br3 |      6000         .25    .4330488          0          1
+-------------+--------------------------------------------------------
+         br4 |      6000         .25    .4330488          0          1
+      choice |      6000         .25    .4330488          0          1
+     display |      6000    .0523333    .2227169          0          1
+     feature |      6000        .228    .4195776          0          1
+      income |      6000    25.19667     13.0691        2.5       67.5
+-------------+--------------------------------------------------------
+    netprice |      6000    .6760433    .1047469        .28        .79
+
+
+

@@ -1,0 +1,47 @@
+njmin3.def
+
+nj d d_nj fte bk kfc roys wendys co_owned centralj southj pa1 pa2 demp
+
+  Obs:   820
+
+	nj           = 1 if new jersey
+	d            = 1 if after nj min wage increase
+	d_nj         nj*d interaction
+	fte          full time-equivalent employees
+	bk           = 1 if burger king
+	kfc          = 1 if kentucky fried chicken
+	roys         = 1 if roy rodgers
+	wendys       = 1 if wendys
+	co_owned     = 1 if company owned
+	centralj     = 1 if in central nj
+	southj       = 1 if in southern nj
+	pa1          = 1 if in pa, northeast suburbs of phila
+	pa2          = 1 if in pa, easton etc
+	demp         change in full time employment
+
+           
+Data source: http://econ-www.mit.edu/faculty/angrist/data1/mhe/card with permission of David Card
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          nj |       820    .8073171    .3946469          0          1
+           d |       820          .5    .5003052          0          1
+        d_nj |       820    .4036585      .49093          0          1
+         fte |       794    21.02651    9.422746          0         85
+          bk |       820    .4170732    .4933761          0          1
+-------------+--------------------------------------------------------
+         kfc |       820     .195122    .3965364          0          1
+        roys |       820    .2414634    .4282318          0          1
+      wendys |       820    .1463415    .3536639          0          1
+    co_owned |       820    .3439024    .4752989          0          1
+    centralj |       820    .1536585    .3608412          0          1
+-------------+--------------------------------------------------------
+      southj |       820    .2268293    .4190369          0          1
+         pa1 |       820    .0878049    .2831836          0          1
+         pa2 |       820     .104878    .3065832          0          1
+        demp |       768   -.0704427    9.016441      -41.5         34
+
+
+
+            

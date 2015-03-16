@@ -1,0 +1,28 @@
+demand.def
+
+  p1  p2  p3  y  q1  q2  q3
+
+  Obs:   30 time series oservations all expressed in index form
+
+  p1 = price of meat
+  p2 = price of fruit and vegetables
+  p3 = price of cereal and bakery products
+   y = income
+  q1 = quantity of meat
+  q2 = quantity of fruit and vegetables
+  q3 = quantity of cereal and bakery products
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          p1 |        30      100.16    33.98477         48      170.1
+          p2 |        30    125.9733    55.05249       34.2        266
+          p3 |        30       71.35    35.58923       22.2      139.1
+           y |        30       77.88    24.31765       35.2      144.6
+          q1 |        30    120.1167    73.58585         32        374
+-------------+--------------------------------------------------------
+          q2 |        30    88.99333    49.97657       14.5      208.8
+          q3 |        30    125.5267    90.71284       37.3      386.2
+
+
+  

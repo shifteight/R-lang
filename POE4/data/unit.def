@@ -1,0 +1,23 @@
+unit.def
+
+w x y z
+
+  Obs: 199  
+
+	w : AR process
+
+        x : AR process with trend
+	
+	y : Random walk
+
+	z : Random walk with drift
+
+Data Source:  generated series 
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           w |       199    8.131558    2.601894   1.301199   14.48945
+           x |       199    17.27226    6.647608   1.357299   28.48739
+           y |       199    .7488905    3.401586  -7.431993   8.252406
+           z |       199    18.55878    9.265142   .9120676   37.53984

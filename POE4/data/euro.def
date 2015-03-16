@@ -1,0 +1,17 @@
+euro.def
+
+  r
+
+   r : returns to the Euro Share price Index
+
+  Obs: 204, monthly (1988:01-2004:12)  
+
+
+Data source: http://au.finance.yahoo.com  
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       r     |       204    .7867549    5.192137  -17.74131   14.57551
+
+              

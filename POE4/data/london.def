@@ -1,0 +1,40 @@
+london.def
+
+	Obs: 1519
+
+	wfood wfuel wcloth walc wtrans wother totexp income age nk
+
+	wfood	=	budget share for food expenditure
+	wfuel	=	budget share for fuel expenditure
+	wcloth	=	budget share for clothing expenditure
+	walc	=	budget share for alcohol expenditure
+	wtrans	=	budget share for transport expenditure
+	wother	=	budget share for other good expenditure
+	totexp	=	total household expenditure
+			(rounded to the nearest 10 UK pounds sterling)
+	income	=	total net household income
+			(rounded to the nearest 10 UK pounds sterling)
+	age	=	age of household head
+	nk	=	number of children
+
+  
+	Data source: The data were used by:
+
+	Richard Blundell, Alan Duncan and Krishna Pendakur, "Semiparametric Estimation and Consumer Demand", 
+	Journal of Applied Econometrics, Vol. 13, No. 5, 1998, pp. 435-462.
+             
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       wfood |      1519    .3564592    .1051254      .0571       .789
+       wfuel |      1519    .0910125    .0519025          0      .4803
+      wcloth |      1519     .107232    .0948078          0      .7602
+        walc |      1519    .0605964    .0633246          0      .4281
+      wtrans |      1519    .1323505    .1053218          0      .7638
+-------------+--------------------------------------------------------
+      wother |      1519    .2523479    .1032968      .0361      .8066
+      totexp |      1519    98.69651    43.19288         30        390
+      income |      1519    136.2475    61.06116         20       1110
+         age |      1519     35.7788    7.772866         19         60
+          nk |      1519    1.608953    .4881455          1          2

@@ -1,0 +1,28 @@
+fullmoon.def
+
+cases t holiday friday saturday fullmoon newmoon
+  
+	Obs:   229 time series (daily) observations
+
+	cases		number of emergency room cases
+	t		time indicator, t = 1, ..., 229
+	holiday		=1 if day was a holiday
+	friday		=1 if friday
+	saturday	=1 if saturday
+	fullmoon	=1 if moon was full
+	newmoon		=1 if moon was new
+			           
+
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       cases |       229    100.5677    11.99455         69        141
+           t |       229         115    66.25079          1        229
+     holiday |       229    .0131004     .113954          0          1
+      friday |       229    .1441048    .3519653          0          1
+    saturday |       229    .1441048    .3519653          0          1
+-------------+--------------------------------------------------------
+    fullmoon |       229    .0349345    .1840162          0          1
+     newmoon |       229    .0305677    .1725204          0          1

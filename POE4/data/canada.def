@@ -1,0 +1,17 @@
+canada.def
+
+canada
+
+  Obs: 432, monthly, (1971:01 - 2006:12)  
+
+	canada : Canada / U.S. Foreign Exchange Rate
+
+ 
+Source: Board of Governors of the Federal Reserve System
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      canada |       433     1.24726    .1662245      .9623     1.5997
+
+

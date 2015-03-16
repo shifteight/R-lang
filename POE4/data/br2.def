@@ -1,0 +1,37 @@
+br2.def
+
+price sqft Bedrooms Baths Age Owner Pool Traditional Fireplace Waterfront
+  
+	Obs:   1080 home sales in Baton Rouge, LA during mid-2005
+
+	price		sale price, dollars
+	sqft		total square feet
+	bedrooms	number of bedrooms
+	baths		number of full baths
+	age		age in years
+	Owner		= 1 if owner occupied at sale; = 0 if vacant or tenant
+	Pool		= 1 if pool present
+	Traditional	= 1 if traditional style; = 0 if other, such as townhouse, contemporary, etc.
+	Fireplace	= 1 if fireplace present
+	Waterfront	= 1 if on waterfront
+           
+Data source: Dr. Kelley Pace, Department of Finance, Louisiana State University             
+
+Note: br2.dat is a smaller version of br.dat
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       price |      1080    154863.2    122912.8      22000    1580000
+        sqft |      1080    2325.938    1008.098        662       7897
+    bedrooms |      1080     3.17963    .7094959          1          8
+       baths |      1080    1.973148    .6120669          1          5
+         age |      1080    19.57407    17.19425          1         80
+-------------+--------------------------------------------------------
+       owner |      1080    .4888889    .5001081          0          1
+        pool |      1080    .0796296    .2708444          0          1
+ traditional |      1080    .5388889    .4987163          0          1
+   fireplace |      1080     .562963    .4962496          0          1
+  waterfront |      1080    .0722222    .2589754          0          1
+

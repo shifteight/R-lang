@@ -1,0 +1,71 @@
+nls_panel2.def
+
+
+ id  year  lwage  hours  age  educ  collgrad  msp  nev_mar  not_smsa  c_city  south  black  union  exper  exper2  tenure  tenure2  dlwage  dexper  dtenure  dsouth  dunion  dexper2  dtenure2  d88 
+
+
+   obs:  1432 [2 year on 716 individuals] 
+
+id		group(id)
+year		interview year
+lwage		ln(wage/GNP deflator)
+hours		usual hours worked
+age		age in current year
+educ		current grade completed
+collgrad	1 if college graduate
+msp		1 if married, spouse present
+nev_mar		1 if never yet married
+not_smsa	1 if not SMSA
+c_city		1 if central city
+south		1 if south
+black		1 if black
+union		1 if union
+exper		total work experience
+exper2		exper^2
+tenure		job tenure, in years
+tenure2		tenure^2
+dlwage		= (lwage - lwage[_n-1])
+dexper		= (exper - exper[_n-1])
+dtenure		= (tenure - tenure[_n-1])
+dsouth		= (south - south[_n-1])
+dunion		= (union - union[_n-1])
+dexper2		= (exper2 - exper2[_n-1])
+dtenure2	= (tenure2 - tenure2[_n-1])
+d88		1 if year 1988
+
+This data is a subset of nls_panel containing only years 1987 and 1988
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          id |      1432       358.5    206.7634          1        716
+        year |      1432        87.5    .5001747         87         88
+       lwage |      1432    1.989213    .4827518   .5440826   4.005049
+       hours |      1432    38.55726    7.666681          2         70
+         age |      1432    38.50279    3.137429         33         46
+-------------+--------------------------------------------------------
+        educ |      1432    13.02235    2.444533          4         18
+    collgrad |      1432    .2304469     .421266          0          1
+         msp |      1432    .6634078    .4727091          0          1
+     nev_mar |      1432    .1222067    .3276388          0          1
+    not_smsa |      1432    .3009777    .4588433          0          1
+-------------+--------------------------------------------------------
+      c_city |      1432    .2925978    .4551142          0          1
+       south |      1432    .4273743    .4948702          0          1
+       black |      1432    .2821229    .4501901          0          1
+       union |      1432    .2604749    .4390471          0          1
+       exper |      1432    14.50569    3.287519   2.544872    27.1923
+-------------+--------------------------------------------------------
+      exper2 |      1432    221.2153    95.34746   6.476373   739.4214
+      tenure |      1432    8.531948      5.6371          0      24.75
+     tenure2 |      1432    104.5488    113.7672          0   612.5625
+      dlwage |       716    .0265633    .2535805  -2.472572   1.833063
+      dexper |       716    1.303905    .2392759          0   1.538462
+-------------+--------------------------------------------------------
+     dtenure |       716    1.070182     1.45932  -14.58333   2.416667
+      dsouth |       716   -.0027933    .0747435         -1          1
+      dunion |       716    .0013966    .3015081         -1          1
+     dexper2 |       716    37.99855    11.43548          0   71.39789
+    dtenure2 |       716    21.32165    21.91359  -212.6736   68.11804
+-------------+--------------------------------------------------------
+         d88 |      1432          .5    .5001747          0          1

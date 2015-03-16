@@ -1,0 +1,17 @@
+mc1.def
+
+simulated data
+
+x y
+  
+	Obs:   40 
+	
+	x		explanatory variable
+	y		dependent variable
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           x |        40          15    5.063697         10         20
+           y |        40    255.2926    79.15606   104.8784    413.175
+

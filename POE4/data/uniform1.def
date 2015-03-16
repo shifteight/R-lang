@@ -1,0 +1,18 @@
+uniform1.def
+
+u1 u2
+
+  obs:  1000  uniform random numbers
+
+  u1 = uniform random numbers using seed 12345
+  u2 = uniform random numbers using seed 1010101
+ 
+
+
+Values generated in Stata 11.1 using function runiform()
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          u1 |      1000    .5082264    .2930674   .0012705   .9997851
+          u2 |      1000    .5090838    .2880467   .0001617   .9993329
+

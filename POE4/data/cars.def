@@ -1,0 +1,29 @@
+cars.def
+
+mpg  cyl  eng  wgt
+
+     Obs: 392
+
+    mpg = miles per gallon
+
+    cyl = number of cylinders
+
+    eng = engine displacement in cubic inches
+
+    wgt = vehicle weight in pounds
+
+ Data on 392 cars taken from consumer choice magazines.
+
+Note on units of measurement: For those who are more comfortable with kilometres, 
+           litres and kilograms, a mile is a measure of distance, gallons 
+           and cubic inches are used to measure volume, and the pound is a 
+           measure of weight.
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         mpg |       392    23.44592    7.805007          9       46.6
+         cyl |       392    5.471939    1.705783          3          8
+         eng |       392     194.412     104.644         68        455
+         wgt |       392    2977.584    849.4026       1613       5140

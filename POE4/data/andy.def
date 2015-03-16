@@ -1,0 +1,19 @@
+andy.def
+
+sales price advert
+
+  obs:  75   a sample of hamburger franchises in 75 cities from Big Andy's Burger Barn.
+
+  sales = S    Monthly sales revenue ($1000s)
+  price = P    A price index for all products sold in a given month.
+  advert = A   Expenditure on advertising ($1000s)
+
+
+Data source:  Courtesy of hamburger franchise, called Big Andy's Burger Barn
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       sales |        75    77.37467    6.488537       62.4       91.2
+       price |        75      5.6872     .518432       4.83       6.49
+      advert |        75       1.844    .8316769         .5        3.1

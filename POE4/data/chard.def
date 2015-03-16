@@ -1,0 +1,21 @@
+chard.def
+
+q xper cap lab age
+  
+  Obs:   75 observations artificially generated
+  
+q	= index of wine output for winery i
+xper	= years experience of winery manager
+cap	= index of capital input
+lab	= index of labor input
+age	= manager's age
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           q |        75    9.634423    4.077198      .0788    19.1759
+        xper |        75       13.88    5.190844          3         27
+         cap |        75    7.834691    4.158956     -.8358    18.7152
+         lab |        75    10.04674    4.838776      .0068    23.8201
+         age |        75    42.94667    10.82776         25         63

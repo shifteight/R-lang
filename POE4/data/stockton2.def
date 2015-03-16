@@ -1,0 +1,30 @@
+stockton2.def
+
+PRICE	SQFT	BEDS	BATHS	AGE	STORIES	VACANT
+
+  Obs:   880 home sales in Stockton, CA during mid-2005
+
+   price	house price, $
+   sqft		total square feet of living area
+   beds		number of bedrooms
+   baths	number of full baths
+   age		age, in years
+   stories	number of stories
+   vacant	Yes = 1 No = 0
+
+           
+Data source: Dr. John Knight, Department of Finance, University of the Pacific    
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       PRICE |       880    112810.8    52813.89      50000     500000
+        SQFT |       880    1611.968    531.9902        704       4300
+        BEDS |       880    3.170455    .6915974          1          6
+       BATHS |       880    2.054545    .6672766          1          5
+         AGE |       880    24.55795    20.64916          0         96
+-------------+--------------------------------------------------------
+     STORIES |       880    1.206818    .4052543          1          2
+      VACANT |       880    .5284091    .4994761          0          1
+         

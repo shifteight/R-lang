@@ -1,0 +1,18 @@
+sterling.def
+
+euro sterling
+
+  Obs: 96, monthly (1999:01 - 2006:12)  
+
+	euro     : Euro/$US
+
+        sterling : Sterling/$US  
+
+Data Source: Statistical Bulletin, Reserve Bank of Australia
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        euro |        96    .9371236    .1346418   .7338896   1.189394
+    sterling |        96    .6108022     .059599   .5092885   .7099507

@@ -1,0 +1,36 @@
+grunfeld.def
+
+  i t inv v k  
+
+   obs:  220 
+
+
+	i	= identifier for firms, listed below
+		= 1 General Motors
+		= 2 US Steel
+		= 3 General Electric
+		= 4 Chrysler
+		= 5 Atlantic Refining
+		= 6 IBM
+		= 7 Union Oil
+		= 8 Westinghouse
+		= 9 Goodyear
+		= 10 Diamond Match
+		= 11 American Steel
+	t	= identifier for year, t=1 is 1935; t=20 is 1954
+	inv	= gross investment in plant and equipment, millions of $1947 
+	v	= value of common and preferred stock, millions of $1947
+	k	= stock of capital, millions of $1947
+	
+Source: Kleiber and Zeileis (2010) "The Grunfeld Data at 50" German Economic Review
+        We thank the authors for providing the data
+
+	
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         inv |       220    133.3119    210.5872        .93     1486.7
+           v |       220    988.5778    1287.301     30.284     6241.7
+           k |       220    257.1085    293.2279         .8     2226.3
+        firm |       220           6    3.169489          1         11
+        year |       220      1944.5    5.779431       1935       1954

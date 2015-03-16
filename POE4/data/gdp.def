@@ -1,0 +1,19 @@
+gdp.def
+
+  usa aus
+
+  Obs: 124, quarterly, (1970:1 - 2000.4)  
+
+	usa = u : real GDP of USA
+
+	aus = a : real GDP of Australia
+
+Data Source: International Financial Statistics, International Monetary Fund
+
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       usa   |       124    63.73438    17.59423    38.2991    100.721
+       aus   |       124    62.72528    17.65155    38.2355    100.604

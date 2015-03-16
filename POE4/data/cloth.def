@@ -1,0 +1,18 @@
+cloth.def
+
+ c1   q1   c2  q2
+
+  Obs:   28 annual time series observations on two clothing firms
+
+   c1	total cost for firm 1	
+   q1	output for firm 1	
+   c2	total cost for firm 1	
+   q2	output for firm 1	
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          c1 |        28    346.3929     143.989        169        733
+          q1 |        28       5.365    2.611505        1.3       9.87
+          c2 |        28    304.4643    135.5099        132        763
+          q2 |        28    4.601071    2.465916       1.04       9.93

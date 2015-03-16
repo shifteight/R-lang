@@ -1,0 +1,26 @@
+cola.def
+
+id choice price feature display
+  
+	Obs:   1822 
+	
+	id		customer id
+	choice		= 1 if brand chosen
+	price		price of 2 liter soda
+	feature		= 1 featured item at the time of purchase
+	display		= 1 if displayed at time of purchase
+	
+Data source: Dr. Ron Niedrich and Dr. Danny Weathers, Marketing Department, Louisiana State University
+
+Note: These data are in stacked form. There are 3 records per customer id. The first record
+      is for Pepsi, the 2nd for 7-Up and the 3rd for Coke
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          id |      5466       911.5    526.0141          1       1822
+      choice |      5466    .3333333    .4714476          0          1
+       price |      5466    1.185134    .3059794        .16       2.99
+     feature |      5466    .5087816    .4999686          0          1
+     display |      5466    .3635199    .4810567          0          1
+

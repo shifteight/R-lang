@@ -1,0 +1,44 @@
+nels.def
+
+psechoice hscath hsrural grades faminc famsiz parsome parcoll female asian hispan black grants loans 
+  
+  Obs:   6649 observations 
+  
+psechoice	= 1 if first postsecondary education was no college
+		= 2 if first postsecondary education was a 2-year college
+		= 3 if first postsecondary education was a 4-year college
+hscath		= 1 if catholic high school graduate
+hsrural		= 1 if high school rural
+grades		= average grade in math, english and social studies on 13 point scale with 1 = highest
+faminc		= gross 1991 family income (in $1000)
+famsiz		= number of family members
+parsome		= 1 if most educated parent had some college, but not a 4-year degree
+parcoll		= 1 if most educated parent graduated from college or had an advanced degree
+female		= 1 if female
+asian		= 1 if asian
+hispan		= 1 if hispan
+black		= 1 if black
+grants		= 1 if student had a grant/scholarship or fellowship when attending college
+loans		= 1 if student received a loan while attending college
+
+Data a sample from the National Education Longitudinal Study of 1988 (NELS:88).The study and data are summarized in National Education Longitudinal Study:  1988-1994, Descriptive Summary Report With an Essay on Access and Choice in Post-secondary Education, by Allen Sanderson, Bernard Dugoni, Kenneth Rasinski and John Taylor, C. Dennis Carroll project officer, NCES 96-175, National Center for Education Statistics, March 1996.
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+   psechoice |      6649     2.30952    .7958798          1          3
+      hscath |      6649    .0774553    .2673325          0          1
+     hsrural |      6649    .3263649    .4689178          0          1
+      grades |      6649    6.435658    2.261568       1.15      12.67
+      faminc |      6649    50.79523    40.60194          0        250
+-------------+--------------------------------------------------------
+      famsiz |      6649    4.270717    1.342331          1         10
+     parsome |      6649    .4620244    .4985933          0          1
+     parcoll |      6649    .3286208    .4697471          0          1
+      female |      6649    .5095503    .4999464          0          1
+       asian |      6649    .0851256    .2790895          0          1
+-------------+--------------------------------------------------------
+      hispan |      6649    .0891863     .285034          0          1
+       black |      6649    .0917431    .2886847          0          1
+      grants |      6649     .338096     .473097          0          1
+       loans |      6649    .1998797    .3999398          0          1

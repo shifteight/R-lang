@@ -1,0 +1,16 @@
+byd.def
+
+  r
+
+  Obs: 500  
+
+   r : returns to shares in BrightenYourDay (BYD) Lighting
+
+Data Source: This is generated data 
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        r    |       500    1.078294    1.185025  -2.768566   7.008874
+
+

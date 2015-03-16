@@ -1,0 +1,27 @@
+tuna.def
+
+sal1 apr1 apr2 apr3 disp dispad 
+
+   Obs:   52 Weekly observations
+
+   sal1		number of cans of brand #1 sold during week
+   apr1		average price per can of brand #1 during week
+   apr2		average price per can of brand #2 during week
+   apr3		average price per can of brand #3 during week           
+   disp		=1 if store display for brand #1 during week but no newspaper ad
+   dispad	=1 if store display for brand #1 during week and newspaper ad during week
+
+Data source: Nielsen Marketing Research    
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        sal1 |        52    6718.712    6915.083       1762      32820
+        apr1 |        52       .7825    .0980371        .61        .92
+        apr2 |        52    .8059615    .1121494        .43        .93
+        apr3 |        52    .7936538    .0800987        .59         .9
+        disp |        52    .4423077     .501506          0          1
+-------------+--------------------------------------------------------
+      dispad |        52    .1730769    .3820047          0          1
+

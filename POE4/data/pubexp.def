@@ -1,0 +1,20 @@
+pubexp.def
+
+ ee    gdp      p
+
+  Obs:   34 countries
+
+   ee		public expenditure on education	
+   gdp		gross domestic product
+   p		population
+   
+           
+Data source:  Dougherty, C. (1992) Introduction to Econometrics, Oxford University Press 
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          ee |        34    14.35912    32.35265        .22      181.3
+         gdp |        34    249.3462    478.6645       5.67     2586.4
+           p |        34    31.30676     46.5181        .36     227.64
+     

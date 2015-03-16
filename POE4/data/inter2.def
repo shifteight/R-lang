@@ -1,0 +1,14 @@
+inter2.def
+
+y
+
+  Obs: 300  
+
+Source: generated time series data
+
+
+   Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          y |       300       9.457     5.542        -0.002     16.949
+
+

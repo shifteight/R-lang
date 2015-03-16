@@ -1,0 +1,27 @@
+liquor.def
+
+  hh   l1 x1  l2  x2  l3  x3
+
+  Obs:   40 households over 3 years
+
+  hh = household
+  l1 = expenditure on liquor in year 1 (thousands of dollars)
+  x1 = income in year 1 (thousands of dollars)
+  l2 = expenditure on liquor in year 2 (thousands of dollars)
+  x2 = income in year 2 (thousands of dollars)
+  l3 = expenditure on liquor in year 3 (thousands of dollars)
+  x3 = income in year 3 (thousands of dollars)
+  
+  
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          hh |        40        20.5    11.69045          1         40
+          l1 |        40     2.79925    1.380748          0       6.44
+          x1 |        40     65.6575    21.57532       30.6       96.9
+          l2 |        40    2.767325    1.161315          0      4.844
+          x2 |        40     70.6625    22.20492       31.8      104.1
+-------------+--------------------------------------------------------
+          l3 |        40    2.973525    1.682451          0      6.408
+          x3 |        40     75.6425    22.06811       38.3      107.6

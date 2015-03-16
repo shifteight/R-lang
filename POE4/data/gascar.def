@@ -1,0 +1,42 @@
+gascar.def
+
+  cty  yr   ln_gas_car  ln_y_pop  ln_pmg_pgdp  ln_car_pop
+
+   obs:  114 
+
+	cty = Country 
+			1 = Austria
+			2 = Belgium
+			3 = Canada
+			4 = Denmark
+			5 = France
+			6 = Germany
+	yr = Year (from 1960 to 1978)
+
+  The remaining data is expressed in terms of the natural logarithms
+  of the following variables
+
+	gas/car  = motor gasoline consumption per car
+	y/pop    = per capita real income
+	pmg/pgdp = real motor gasoline price
+	car/pop  = stock of cars per capita.	
+
+	ln_gas_car  = ln(gas/car)
+	ln_y_pop    = ln(y/pop)  
+	ln_pmg_pgdp = ln(pmg/pgdp)  
+	ln_car_pop  = ln(car/pop
+
+
+Source: Baltagi, B.H. and J.M. Griffin (1983), Gasoline Demand in the OECD:An Application of Pooling and Testing Procedures,European Economic Review, 22, 117-137.
+	
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         cty |       114         3.5    1.715365          1          6
+          yr |       114        1969    5.501408       1960       1978
+  ln_gas_car |       114    4.123275    .3633739   3.749535   4.899694
+    ln_y_pop |       114   -5.836177    .2630513  -6.474277  -5.311272
+ ln_pmg_pgdp |       114   -.4980504    .2835825  -1.185684  -.0195983
+-------------+--------------------------------------------------------
+  ln_car_pop |       114   -8.517271    .4332666   -9.76684  -7.768793

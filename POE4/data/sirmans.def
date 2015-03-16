@@ -1,0 +1,30 @@
+sirmans.def
+
+adjust fixrate margin yield points maturity networth
+  
+  Obs:   78 
+  
+	adjust 		= 1 if an adjustable rate mortgage is chosen.  
+ 	fixrate		= fixed interest rate
+ 	margin		= the variable rate less the fixed rate
+ 	yield		= the 10-year treasury rate less the one year treasury rate
+ 	points 		= ratio of points paid on adjustable rates to those paid on fixed rates
+ 	maturity 	= ratio of maturities on adjustable to fixed rates
+ 	networth	= net worth of borrower
+
+The authors wish to thank C.F. Sirmans for these data.
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      adjust |        78    .4102564    .4950639          0          1
+     fixrate |        78    13.24936    .6830704      11.76       14.5
+      margin |        78    2.291923    1.200171        -.9        5.5
+       yield |        78     1.60641    .1846159       1.38       2.04
+      points |        78    1.497949     .769767          0       4.34
+-------------+--------------------------------------------------------
+    maturity |        78    1.058333    .2744365        .42       2.38
+    networth |        78    3.504013    4.720555      -.056      17.86
+
+

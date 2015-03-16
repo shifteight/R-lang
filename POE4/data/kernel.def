@@ -1,0 +1,13 @@
+kernel.def
+
+    x   y 
+
+  Obs: 500
+
+	 
+Source: generated data 
+
+ x are drawings from a normal distibution with mean 7 and standard deviation 1.5; 
+
+ y are drawings from a mixture of normal distibutions; one with mean 9 and standard deviation 0.5  and the other with mean 5 and standard deviation 1. 
+ 

@@ -1,0 +1,15 @@
+oil.def
+
+oil
+
+  Obs: 88, annual, (1883 - 1970)  
+
+	oil : price of oil (in 1967 constant dollars)
+
+ 
+Source: Pindyck and Rubinfeld (1991, p.463)
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         oil |        88    3.480909    .7347462       1.85        5.4

@@ -1,0 +1,29 @@
+motel.def
+
+time days motel_rate comp_rate motel_pct comp_pct repair relprice
+  
+	Obs:   25 months
+
+	time           	month, 1=march 2003,.., 25=march 2005
+	days           	days in month
+	motel_rate      motel room rate, $
+	comp_rate       competitors room rate, $
+	motel_pct       percentage motel occupancy
+	comp_pct        percentage competitors occupancy
+	repair          = 1 if motel under repair, = 0 otherwise
+	relprice        relative price = motel_rate/comp_rate
+			           
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        time |        25          13    7.359801          1         25
+        days |        25       30.48    .7702813         28         31
+  motel_rate |        25     56.4704    2.270964      53.16      60.15
+   comp_rate |        25     75.9964    4.650265      67.45       83.7
+   motel_pct |        25      75.644    14.43584       39.2       96.2
+-------------+--------------------------------------------------------
+    comp_pct |        25      62.736    11.09557       42.9       83.9
+      repair |        25         .28    .4582576          0          1
+    relprice |        25    .7452754    .0472805    .661948    .845209

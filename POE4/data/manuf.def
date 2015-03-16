@@ -1,0 +1,21 @@
+manuf.def
+
+ k   l   e   m   y
+
+  Obs:  25 annual observations on aggregate quantities for the U.S. manufacturing sector
+
+  k = an index of capital
+  l = an index of labor
+  e = an index of energy use
+  m = an index of intermediate materials
+  y = an index of output
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           k |        25    1.797636    .4667699          1     2.7495
+           l |        25    1.276544    .2098188      .9273     1.6471
+           e |        25    1.574968    .4183958      .9293      2.395
+           m |        25     1.47956    .3871032      .8857     2.1885
+           y |        25     1.49968    .3579919      .9376     2.1945
+

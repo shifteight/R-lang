@@ -1,0 +1,19 @@
+tobit.def
+
+y x
+  
+	Obs:   200 
+	
+	y		censored variable
+	x		explanatory variable
+	
+	
+Data source: Simulated data
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           y |       200    2.951102    3.906139          0    14.9416
+           x |       200     9.88019    5.659853    .148959     19.824
+

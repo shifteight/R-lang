@@ -1,0 +1,46 @@
+mexican.def
+
+  id trans lnprice bar street othersite nocondom attractive school age rich regular alcohol
+ 
+
+   obs:  3016 
+
+	id    = identifier for sex worker; 754 total
+	trans = transaction number; 4 for each sex worker
+	lnprice  = logarithm of price of transaction
+	bar      = 1 if transaction originated in a bar; 0 otherwise
+	street   = 1 if transaction originated in a street; 0 otherwise
+	othersite= 1 if transaction originated in another site; 0 otherwise
+	nocondom = 1 if a condom was not used; 0 otherwise
+	attractive = 1 if the sex worker is attractive; 0 otherwise
+	school     = 1 if sex worker has completed secondary school or higher; 0 otherwise
+	age        = age of sex worker in years
+	rich     = 1 if client is rich; 0 otherwise
+	regular  = 1 if client is regular; 0 otherwise
+	alcohol  = 1 if client consumed alcohol prior to the transaction
+	
+	
+Source: These data are a subset of those used by Paul Gertler, Manisha Shah and Stefano Bertozzi in their study “Risky Business: The Market for Unprotected Sex”, Journal of Political Economy(2005), 113, 518-550. 
+We are grateful to the authors for permission to use their data and to Manisha Shah for compiling the subset used in this exercise.
+	
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          id |      3016       377.5     217.697          1        754
+       trans |      3016         2.5    1.118219          1          4
+     lnprice |      3016    5.839489    .7155389   2.302585   8.665613
+         bar |      3016    .8047082    .3964909          0          1
+      street |      3016    .1747347     .379803          0          1
+-------------+--------------------------------------------------------
+   othersite |      3016     .020557    .1419194          0          1
+    nocondom |      3016    .1011273    .3015472          0          1
+  attractive |      3016     .137931    .3448848          0          1
+      school |      3016    .3169761    .4653752          0          1
+         age |      3016    27.40981    7.729452         12         54
+-------------+--------------------------------------------------------
+        rich |      3016    .8428382    .3640136          0          1
+     regular |      3016    .5321618    .4990473          0          1
+     alcohol |      3016     .846817    .3602236          0          1
+
+. 
+
+ 

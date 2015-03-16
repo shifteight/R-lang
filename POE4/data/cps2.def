@@ -1,0 +1,35 @@
+cps2.def
+
+wage educ exper female black married union south fulltime metro 
+  
+  Obs:   1000 observations; subsample of cps1.dat with fewer variables
+
+   wage		earnings per hour
+   educ		years of education
+   exper	experience
+   female	=1 if female
+   black	=1 if black
+   married	=1 if married
+   union	=1 if union member
+   south	=1 if south
+   fulltime	=1 if full time worker
+   metro	=1 if lives in metropolitan area
+
+           
+Data source: Dr. Kang Sun Lee, Louisiana Department of Health and Human Services             
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        wage |      1000    10.21302    6.246641       2.03      60.19
+        educ |      1000      13.285    2.468171          1         18
+       exper |      1000       18.78    11.31882          0         52
+      female |      1000        .494    .5002142          0          1
+       black |      1000        .088    .2834367          0          1
+-------------+--------------------------------------------------------
+     married |      1000        .576    .4944375          0          1
+       union |      1000        .165    .3713663          0          1
+       south |      1000        .315    .4647483          0          1
+    fulltime |      1000        .873    .3331396          0          1
+       metro |      1000        .808    .3940702          0          1

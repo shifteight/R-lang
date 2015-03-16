@@ -1,0 +1,31 @@
+gasga.def
+
+  cty  yr   gas   inc  price  cars
+
+   obs:  38
+
+	cty = Country 
+			1 = Austria
+			6 = Germany
+
+	yr = Year (from 1960 to 1978)
+
+  	gas  = motor gasoline consumption per car
+	inc    = per capita real income
+	price = real motor gasoline price
+	cars  = stock of cars per capita.	
+
+
+Source: Baltagi, B.H. and J.M. Griffin (1983), Gasoline Demand in the OECD:An Application of Pooling and Testing Procedures,European Economic Review, 22, 117-137.
+	
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+         cty |        38         3.5    2.533559          1          6
+          yr |        38        1969    5.550749       1960       1978
+         gas |        38    53.49648    5.337936   46.93586   66.64506
+         inc |        38     .002601      .00064   .0015426   .0038421
+       price |        38    .6103333    .0784366    .483901    .830348
+-------------+--------------------------------------------------------
+        cars |        38    .0001878    .0000783   .0000573   .0003526

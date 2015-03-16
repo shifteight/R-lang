@@ -1,0 +1,20 @@
+var.def
+
+w z
+
+  Obs: 100  
+  
+	w: random walk process
+
+        Z: random walk process
+
+Data Source: generated time series data
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           w |       100   -2.234774    1.402021  -5.012823    .224541
+           z |       100    1.343557    .9760623   -.599137   2.859522
+
+

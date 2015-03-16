@@ -1,0 +1,32 @@
+stockton4.def
+
+sprice livarea beds baths lgelot age pool
+
+  Obs:   1500 home sales in Stockton, CA from Oct 1, 1996 to Nov 30, 1998
+   
+  This is a subset of stockton3.dat, the first 1500 observations
+
+	sprice         	selling price of home, dollars
+	livarea         living area, hundreds of square feet
+	beds            number of beds
+	baths           number of baths
+	lgelot          =1 if lot size > .5 acres, 0 otherwise
+	age            	age of home at time of sale, years
+	pool           	=1 if home has pool, 0 otherwise
+           
+Data source: Dr. John Knight, Department of Finance, University of the Pacific 
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      sprice |      1500    123693.9    63250.89      22000     713000
+     livarea |      1500    16.74667    5.461963          7         49
+        beds |      1500    3.285333     .619818          1          6
+       baths |      1500       2.133    .5253523          1        6.5
+      lgelot |      1500    .0633333    .2436428          0          1
+-------------+--------------------------------------------------------
+         age |      1500       21.86    13.11464          0         97
+        pool |      1500    .0653333    .2471955          0          1
+
+            

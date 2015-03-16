@@ -1,0 +1,19 @@
+vec.def
+
+x y
+
+  Obs: 100  
+
+	x: random walk process
+
+        y: random walk process
+
+Data Source: generated time series data
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           x |       100    .5488947     .460895    -.34981   1.419284
+           y |       100    .2854119    .2314027   -.170192     .83868
+
+ 

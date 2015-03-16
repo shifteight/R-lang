@@ -1,0 +1,90 @@
+means.def
+
+   cityid 1-10 cityname 13-52 d  53-58                 
+   izlaw  60-65   izlaw_d  67-72 izyear  75-80         
+   avgprice  83-92  lnprice 95-115  units  120-130           
+   lnunits  140-150 hhlds  165-176 lnhhlds  180-200     
+   pop  205-215 lpop 230-250  density  260-280       
+   medhhinc  290-300    lmedhhinc 310-330  educattain 340-360  
+   proppoverty  370-390    meantttw 400-420   prop65  430-450        
+   dlnprice  460-480   dlnunits  490-510   dlmedhhinc  520-540   
+   ddensity  550-570   deducattain 680-700  dproppoverty  710-730 
+   dmeantttw  740-760   dprop65 770-780  dpop 790-810  dlpop 820-840
+  
+	Obs:   311 cities for 2 years   622
+ 
+ 	cityid    	city id 
+   	cityname    	city name 
+   	d    		1 for year 2000 
+   	izlaw    	iz law passed 1986-1995 
+   	izlaw_d    	izlaw*d interaction 
+   	izyear    	year city passed policy 
+   	avgprice    	average home price 
+   	lnprice    	log(avgprice) 
+   	units    	# of units  
+   	lnunits    	log(units) 
+   	hhlds    	# of households 
+   	lnhhlds    	log(hhlds) 
+   	pop    		population in 1000s 
+   	lpop    	log(pop) 
+   	density    	people/acre 
+   	medhhinc    	median household income 
+   	lmedhhinc    	log(medhhinc) 
+   	educattain    	proportion w/college degree 
+   	proppoverty    	proportion below poverty level 
+   	meantttw    	mean travel time to work 
+   	prop65    	proportion >  age 65 
+   	dlnprice    	lnprice[2000]-lnprice[1990] 
+   	dlnunits    	lnunits[2000]-lnunits[1990] 
+   	dlmedhhinc    	lnmedhhinc[2000]-lnmedhhinc[1990] 
+   	ddensity    	density[2000]-density[1990] 
+   	deducattain    	educattain[2000]-educattain[1990] 
+   	dproppoverty    proppoverty[2000]-proppoverty[1990] 
+   	dmeantttw    	meantttw[2000]-meantttw[1990] 
+   	dprop65    	prop65[2000]-prop65[1990] 
+   	dpop    	pop[2000]-pop[1990] 
+   	dlpop    	lpop[2000]-lpop[1990] 
+			           
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+      cityid |       622    643564.8    24758.99     600296     687042
+    cityname |         0
+           d |       622          .5    .5004024          0          1
+       izlaw |       622    .1061093    .3082254          0          1
+     izlaw_d |       622    .0530547    .2243229          0          1
+-------------+--------------------------------------------------------
+      izyear |       100        1994     4.64062       1986       2003
+    avgprice |       622    244096.2    188632.6      49151    2253218
+     lnprice |       622    12.22153    .5747269   10.80265   14.62787
+       units |       622    27091.44    83673.85       1468    1337668
+     lnunits |       622    9.530669    .9673002   7.291656   14.10644
+-------------+--------------------------------------------------------
+       hhlds |       622     25728.2    79320.36       1408    1276609
+     lnhhlds |       622    9.474429    .9725172   7.249926   14.05972
+         pop |       622    74.86069    226.1905      4.499   3694.834
+        lpop |       622    3.654345    .9573289   1.503855   8.214691
+     density |       622    7.444147    5.962402   .2222599   37.32389
+-------------+--------------------------------------------------------
+    medhhinc |       622     46208.1    19520.91      16888     193157
+   lmedhhinc |       622    10.66869    .3692653   9.734359   12.17126
+  educattain |       622    .2016863    .1520974   .0033831   .7784514
+ proppoverty |       622    .1151569    .0711162   .0099768   .3992895
+    meantttw |       622    25.55441    5.044765   11.69704   43.69799
+-------------+--------------------------------------------------------
+      prop65 |       622    .1095674    .0551502   .0298894   .5664434
+    dlnprice |       311    .2558305    .2728853  -.6968927   1.661104
+    dlnunits |       311    .1239177    .1987338   -.731493   1.452658
+  dlmedhhinc |       311    .2923853    .1009969   .0254517   .5723829
+    ddensity |       311    .8256387    1.005061  -6.195725   4.983041
+-------------+--------------------------------------------------------
+ deducattain |       311    .1092033    .0708644  -.0116293   .3092856
+dproppoverty |       311    .0170168    .0247012   -.070595   .1630218
+   dmeantttw |       311    3.007186    2.599436  -3.656197   26.72733
+     dprop65 |       311    .0057785    .0209855  -.0850816   .0688678
+        dpop |       311     9684.64    18441.13     -28688     209436
+-------------+--------------------------------------------------------
+       dlpop |       311     .171527    .2235745  -.7308068   1.664763
+
+
+Source: The authors thank Tom Means for the data and his assitance.

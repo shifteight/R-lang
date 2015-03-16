@@ -1,0 +1,31 @@
+stockton.def
+
+price sqft age d92  d93  d94  d95  d96
+
+  Obs:   4682 home sales in Stockton, CA from January 1991 to December 1996
+
+   price	house price, $
+   sqft		total square feet of living area
+   age		age, in years
+   d92		= 1 if sale in 1992
+   d93		= 1 if sale in 1993
+   d94		= 1 if sale in 1994
+   d95		= 1 if sale in 1995
+   d96		= 1 if sale in 1996
+           
+Data source: Dr. John Knight, Department of Finance, University of the Pacific 
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       price |      4682    109561.4     35411.8      20000     375000
+        sqft |      4682    1448.934    341.2112        600       2200
+         age |      4682    24.95323    20.14404          0         96
+         d92 |      4682    .1478001    .3549396          0          1
+         d93 |      4682      .17044     .376059          0          1
+-------------+--------------------------------------------------------
+         d94 |      4682    .1856044    .3888287          0          1
+         d95 |      4682    .1710807    .3766197          0          1
+         d96 |      4682    .2007689    .4006183          0          1
+            

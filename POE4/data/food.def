@@ -1,0 +1,15 @@
+food.def
+
+food_exp income  
+
+  Obs:   40
+
+  1. food_exp (y)                  weekly food expenditure in $
+  2. income   (x)                  weekly income in $100
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+    food_exp |        40    283.5735    112.6752     109.71     587.66
+      income |        40    19.60475    6.847773       3.69       33.4

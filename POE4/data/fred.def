@@ -1,0 +1,22 @@
+fred.def
+
+c y
+
+  Obs: 200, quarterly (1960q1 - 2009q4)  
+
+	c : log of real consumption expenditure
+
+        y : log of real disposable income 
+        
+        * note: The EViews file fred.wf1 uses the name cn for c, since EViews
+                automatically includes an object c.
+
+
+Source: Federal Reserve Economic Data, Federal Reserve Bank of St.Louis
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           c |       200    8.383637    .4905016   7.479017   9.144585
+           y |       200    8.488269    .4734033   7.578401    9.21806
+ 

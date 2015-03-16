@@ -1,0 +1,26 @@
+ch10.def
+
+x y z1 z2 z3 
+  
+  Obs:   100 observations
+
+These data are artificial and generated from y = 1 + x + e, where x and e are N(0,1).
+The z variables are also N(0,1) with
+
+corr(x,e) = .6
+corr(z1,e) = 0
+corr(z2,e) = 0
+corr(z1,x) = .5
+corr(z2,x) = .3
+corr(z3,x) = .5
+corr(z3,e) = .3
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           x |       100    .2391607    .9566552    -1.6484    2.76628
+           y |       100    1.386287    1.838819   -2.96671    6.72735
+          Z1 |       100    .0342066    .8931078   -2.61576    2.09323
+          Z2 |       100    .1205662    1.027656   -2.29936    2.10895
+          Z3 |       100     .062191    1.100069   -2.98265     3.1457
+

@@ -1,0 +1,21 @@
+beer.def
+
+  q pb pl pr i
+
+  Obs:  30 annual observations from a single household
+
+  1. q = litres of beer consumed
+  2. pb = Price of beer ($)
+  3. pl = price of other liquor ($)
+  4. pr = price of remaining goods and services (an index)
+  5. i = income ($)
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           q |        30    56.11333    7.857381       44.3       81.7
+          pb |        30        3.08    .6421945       1.78       4.07
+          pl |        30    8.367333    .7696346       6.95       9.52
+          pr |        30    1.251333     .298314        .67       1.73
+           i |        30     32601.8    4541.966      25088      41593
+

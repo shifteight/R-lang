@@ -1,0 +1,16 @@
+bangla.def
+
+  p   a
+
+   Obs: 34   Annual
+
+	p = Price of sugar cane divided by the price of jute
+               (jute is an alternative crop to sugar cane, planted by Bangladesh farmers)
+  	a = area of sugar cane planted in thousands of hectares in a region of Bangladesh.
+
+   Data Source:  M.Ec. dissertation by M.Jafforulah at the University of New England.
+   
+       Variable |       Obs        Mean    Std. Dev.       Min        Max
+   -------------+--------------------------------------------------------
+              p |        34    1.140265    .2315965       .749      1.852
+              a |        34    56.82588    21.99006      28.96     129.74

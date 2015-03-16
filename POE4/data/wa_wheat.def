@@ -1,0 +1,21 @@
+wa_wheat.def
+
+northampton chapman mullewa greenough time 
+  
+  Obs:   48 observations
+
+   northampton		average wheat yield in tonnes per hectare, Northampton Shire, Western Australia
+   chapman		average wheat yield in tonnes per hectare, Chapman Shire, Western Australia
+   mullewa		average wheat yield in tonnes per hectare, Mullewa Shire, Western Australia
+   greenough		average wheat yield in tonnes per hectare, Greenough Shire, Western Australia
+   time			time index, 1,...,48
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+ northampton |        48    1.168654    .4250324      .3024     2.3161
+     chapman |        48    1.072385    .3328069      .4167     2.0244
+     mullewa |        48    .9840625    .3352854      .3965     1.7992
+   greenough |        48     1.15306    .3653873      .4369     2.2353
+        time |        48        24.5          14          1         48

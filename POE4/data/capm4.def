@@ -1,0 +1,34 @@
+capm4.def
+
+date dis ge gm ibm msft xom mkt riskfree
+
+  Obs:   132, Jan 1998 to December 2008, monthly rates of return
+
+         date 		year/month/day 
+         dis 		Disney monthly rate of return
+ 	 ge 		General Electric monthly rate of return
+ 	 gm 		General Motors monthly rate of return
+ 	 ibm 		IBM monthly rate of return
+ 	 msft 		Microsoft monthly rate of return
+ 	 xom 		Exxon-Mobil monthly rate of return
+ 	 mkt 		Market Portfolio monthly rate of return
+	 riskfree 	Risk free rate = 30 day T-bill
+
+           
+Data source: Wharton Data Services. The authors thank Shuang Zhu for data collection.
+             
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        date |       132    2.00e+07     31745.2   2.00e+07   2.01e+07
+         dis |       132    .0013787    .0808657   -.267794    .241453
+          ge |       132    .0013609    .0699338   -.234902    .192392
+          gm |       132   -.0090815    .1273283   -.389313    .276619
+         ibm |       132    .0083318    .0904847   -.226453    .353799
+-------------+--------------------------------------------------------
+        msft |       132    .0085566    .1093614   -.343529    .407781
+         xom |       132    .0104876    .0534166   -.116462    .232171
+         mkt |       132    .0025114    .0484825   -.184726    .083925
+    riskfree |       132    .0321031    .0171167      .0003     .06234
+
+

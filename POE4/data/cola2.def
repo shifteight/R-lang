@@ -1,0 +1,42 @@
+cola2.def
+
+This data file is an unstacked version of cola.dat
+
+id Pepsi Sevenup Coke Pr_pepsi Pr_7up Pr_coke feat_pepsi feat_7up feat_coke  disp_pepsi disp_7up disp_coke
+  
+	Obs:   1822 
+	
+	id		customer id
+	pepsi		= 1 if pepsi chosen, otherwise = 0
+	Sevenup		= 1 if 7up chosen, otherwise = 0
+	coke		= 1 if coke chosen, otherwise = 0
+	pr_pepsi	price of 2 liter bottle of pepsi	
+	pr_7up		price of 2 liter bottle of 7up
+	pr_coke		price of 2 liter bottle of coke
+	feat_pepsi	= 1 if pepsi is a featured item at the time of purchase, otherwise = 0
+	feat_7up	= 1 if 7up is a featured item at the time of purchase, otherwise = 0
+	feat_coke	= 1 if coke is a featured item at the time of purchase, otherwise = 0
+	disp_pepsi	= 1 if pepsi is displayed at time of purchase, otherwise = 0
+	disp_7up	= 1 if 7up is displayed at time of purchase, otherwise = 0
+	disp_coke	= 1 if coke is displayed at time of purchase, otherwise = 0
+	
+Data source: Dr. Ron Niedrich and Dr. Danny Weathers, Marketing Department, Louisiana State University
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+          id |      1822       911.5    526.1104          1       1822
+       Pepsi |      1822    .3457739    .4757505          0          1
+     Sevenup |      1822    .3743139    .4840781          0          1
+        Coke |      1822    .2799122    .4490791          0          1
+    Pr_pepsi |      1822    1.227453    .2902694        .68       1.79
+-------------+--------------------------------------------------------
+      Pr_7up |      1822     1.11764    .3242961        .16       2.99
+     Pr_coke |      1822    1.210307    .2908002        .68       1.79
+  feat_pepsi |      1822    .5148189    .4999176          0          1
+    feat_7up |      1822    .5159166    .4998838          0          1
+   feat_coke |      1822    .4956092     .500118          0          1
+-------------+--------------------------------------------------------
+  disp_pepsi |      1822    .3117453    .4633336          0          1
+    disp_7up |      1822    .4429199    .4968675          0          1
+   disp_coke |      1822    .3358946    .4724319          0          1

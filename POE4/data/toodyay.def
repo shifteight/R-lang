@@ -1,0 +1,26 @@
+toodyay.def
+
+y  t  rg  rd  rf
+  
+	Obs:   48 annual observations for 1950-1997
+
+    y = wheat yield in tonnes per hectare for the toodyay shire of western australia
+    t = trend term to allow for technological change
+   rg = rainfall at germination (may-june)
+   rd = rainfall at development state (july-august)
+   rf = rainfall at flowering (september-october).
+           the unit of measurement for rainfall is centimetres. 
+
+
+ Data Source:  
+       This data was collected by L.Newton for her PhD at the University of New England.
+               
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+           y |        48    1.476737    .5424934      .3629     2.9669
+           t |        48        24.5          14          1         48
+          rg |        48    1.650583    .5864035       .742      3.158
+          rd |        48    1.666833    .5196713       .756      3.207
+          rf |        48    .7177708    .2866471       .121      1.415

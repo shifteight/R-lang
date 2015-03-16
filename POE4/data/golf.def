@@ -1,0 +1,17 @@
+golf.def
+
+score age
+
+  
+	Obs:   150 tournament scores for 6 major tournaments a year for 25 years
+
+	score		= actual score - par
+	age		= age in decades = years/10
+	
+	Note: par is the "target" score on a golf course. Thus score is number of strokes under (or over) par
+			           
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       score |       150   -2.893333    5.554062        -14         14
+         age |       150         3.2     .723526          2        4.4

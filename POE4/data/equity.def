@@ -1,0 +1,20 @@
+equity.def
+
+dn pn
+
+  Obs: 91, annual (1889 - 1979)  
+
+	dn     : nominal dividends per share
+
+        pn     : Standard and Poor Composite Price Index  
+
+
+Source: Prescott,E.C. and Mehra,R. "The Equity Premium: A Puzzle," Journal of Monetary Economics, 15 March, 1985, pp. 145-161.
+
+
+
+   Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       dn   |        91        1.2299     1.2381       0.17        5.7
+       pn   |        91       29.8288    33.0668       4.23      109.2
+    

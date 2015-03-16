@@ -1,0 +1,26 @@
+utown.def
+
+   price sqft age utown pool fplace 
+  
+  Obs:   1000 observations
+
+   price	house price, in $1000
+   sqft		square feet of living area, in 100's
+   age		house age, in years
+   utown	=1 if close to university
+   pool		=1 if house has pool
+   fplace	=1 if house has fireplace
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+       price |      1000    247.6557    42.19273    134.316    345.197
+        sqft |      1000    25.20965     2.91848      20.03         30
+         age |      1000       9.392    9.426728          0         60
+       utown |      1000        .519    .4998889          0          1
+        pool |      1000        .204    .4031706          0          1
+-------------+--------------------------------------------------------
+      fplace |      1000        .518    .4999259          0          1
+
+

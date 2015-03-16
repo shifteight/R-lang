@@ -1,0 +1,46 @@
+fultonfish.def
+
+ obs:  111
+
+ date lprice quan lquan mon tue wed thu stormy mixed rainy cold totr diff change
+
+	date            date
+	lprice          log(Price) of whiting per pound
+	quan            Quantity of whiting sold, pounds
+	lquan           log(Quantity)
+	mon             Monday
+	tue             Tuesday
+	wed             Wednesday
+	thu             Thursday
+	stormy          High wind and waves
+	mixed           Mixed wind and waves
+	rainy           Rainy day on shore
+	cold            Cold day on shore
+	totr            Total received
+	diff            Inventory change = totr-quan
+	change          = 1 if diff large
+
+The authors would like to thank Kathryn Graddy for the use of the data and her help. 
+See her paper "The Fulton Fish Market", Journal of Economic Perspectives, Vol 20, No 2, Spring 2006, pp. 207-220.
+
+
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+        date |       111    918566.7    3568.818     911202     920508
+      lprice |       111   -.1936811    .3819346  -1.107745   .6643268
+        quan |       111    6334.667     4040.12   490.0003   21619.99
+       lquan |       111     8.52343     .741672   6.194406   9.981374
+         mon |       111    .1891892    .3934351          0          1
+-------------+--------------------------------------------------------
+         tue |       111    .2072072    .4071434          0          1
+         wed |       111    .1891892    .3934351          0          1
+         thu |       111    .2072072    .4071434          0          1
+      stormy |       111    .2882883    .4550202          0          1
+       mixed |       111    .3063063     .463049          0          1
+-------------+--------------------------------------------------------
+       rainy |       111    .1621622    .3702712          0          1
+        cold |       111    .5045045    .5022472          0          1
+        totr |       111    6426.712    4980.899         10      26530
+        diff |       111    92.04528    3021.308     -15210      18040
+      change |       111    .6936937     .463049          0          1
