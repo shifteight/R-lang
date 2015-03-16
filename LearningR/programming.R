@@ -116,6 +116,105 @@ buggy_count(x)
 undebug(buggy_count)
 
 # Testing
+
+## RUnit
+library(RUnit)
 test_dir <- system.file("tests", package='learningr')
 suite <- defineTestSuite("hypotenuse suite", test_dir)
 runTestSuite(suite)
+
+## testthat
+library(testthat)
+filename <- system.file('tests', 'testthat_hypotenuse_tests.R',
+                        package='learningr')
+test_file(filename)
+
+# OO Programming
+
+## S3
+
+## Ref Classes
+
+## class generator template
+my_class_generator <- setRefClass(
+                        "MyClass",
+                        fields = list(
+                          # data variables
+                          ),
+                        methods = list(
+                          # functions to operate on that data
+                          initialize = function(...) {
+                            # called when an object is created
+                          }
+                          )
+                        )
+## build a class for 2D points
+point_generator <- setRefClass(
+                        "point",
+                        fields = list(
+                          # data variables
+                          x = "numeric",
+                          y = "numeric"
+                        ),
+                        methods = list(
+                          initialize = function(x=NA_real_, y=NA_real_) {
+                            "Assign x and y upon object creation."
+                            x <<- x
+                            y <<- y
+                          },
+                          distanceFromOrigin = function() {
+                            "Euclidean distance from the origin"
+                            sqrt(x ^ 2 + y ^ 2)
+                          },
+                          add = function(point) {
+                            "Add another point to this point"
+                            x <<- x + point$x
+                            y <<- y + point$y
+                            .self
+                          }
+                        )
+)
+
+## create objects
+(a_point <- point_generator$new(5, 3))
+
+## return help string
+point_generator$help("initialize")
+
+## wrapping class methods, providing a more traditional interface
+create_point <- function(x, y) {
+  point_generator$new(x, y)
+}
+
+a_point <- create_point(3, 4)
+a_point$distanceFromOrigin()
+
+another_point <- create_point(4, 2)
+a_point$add(another_point)
+
+## list the fields and methods of the class
+point_generator$fields()
+point_generator$methods()
+
+## inheritance
+three_d_point_generator <- setRefClass(
+                             "three_d_point",
+                             fields = list(
+                               z = "numeric"
+                             ),
+                             contains = "point",
+                             methods = list(
+                               initialize = function(x, y, z) {
+                                 "Assign x, y, z upon object creation."
+                                 x <<- x
+                                 y <<- y
+                                 z <<- z
+                               },
+                               distanceFromOrigin = function() {
+                                 "Euclidean distance from the origin"
+                                 sqrt(x ^ 2 + y ^ 2 + z ^ 2)
+                               }
+                             )
+)                             
+a_three_d_point <- three_d_point_generator$new(3, 4, 5)
+a_three_d_point$distanceFromOrigin()
