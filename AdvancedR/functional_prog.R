@@ -159,3 +159,127 @@ rollapply <- function(x, n, f, ...) {
 }
 plot(x)
 lines(rollapply(x, 5, median), col="red", lwd=2)
+
+# parallelisation of lapply()
+lapply3 <- function(x, f, ...) {
+  out <- vector("list", length(x))
+  for (i in sample(seq_along(x))) {
+    out[[i]] <- f(x[[i]], ...)
+  }
+  out
+}
+unlist(lapply(1:10, sqrt))
+unlist(lapply3(1:10, sqrt))
+
+library(parallel)
+# this example is actually slower than lapply
+unlist(mclapply(1:10, sqrt, mc.cores=4))
+# a more realistic example: boostrap replicates of a linear model
+boot_df <- function(x) x[sample(nrow(x), rep=T), ]
+rsquared <- function(mod) summary(mod)$r.square
+boot_lm <- function(i) {
+  rsquared(lm(mpg ~ wt + disp, data=boot_df(mtcars)))
+}
+system.time(lapply(1:500, boot_lm))
+system.time(mclapply(1:500, boot_lm, mc.cores=2))
+
+# apply() for matrix or array
+a <- matrix(1:20, nrow=5)
+apply(a, 1, mean)
+
+## apply() is not idempotent!
+a1 <- apply(a, 1, identity)
+identical(a, a1)     # FALSE
+identical(a, t(a1))  # TRUE
+a2 <- apply(a, 2, identity)
+identical(a, a2)     # TRUE
+
+## sweep(), used with apply, to standardize arrays
+x <- matrix(rnorm(20, 0, 10), nrow=4)
+x1 <- sweep(x, 1, apply(x, 1, min), `-`)
+x2 <- sweep(x1, 1, apply(x1, 1, max), `/`)
+
+## outer()
+## create a time table
+outer(1:3, 1:10, "*")
+
+## sapply() allows for "ragged" arrays
+## Example: compare two groups in a medical trial
+pulse <- round(rnorm(22, 70, 10/3)) + rep(c(0,5), c(10,12))
+group <- rep(c('A', 'B'), c(10,12))
+tapply(pulse, group, length)
+tapply(pulse, group, mean)
+## tapply() is just the combination of split() and sapply()
+tapply2 <- function(x, group, f, ..., simplify=TRUE) {
+  pieces <- split(x, group)
+  sapply(pieces, f, simplify=simplify)
+}
+tapply2(pulse, group, length)
+tapply2(pulse, group, mean)
+
+# manipulating lists
+# Reduce()
+Reduce2 <- function(f, x) {
+  out <- x[[1]]
+  for (i in seq(2, length(x))) {
+    out <- f(out, x[[i]])
+  }
+  out
+}
+
+## find the values that occur in every element of a list of vectors
+l <- replicate(5, sample(1:10, 15, replace=T), simplify=FALSE)
+str(l)
+Reduce(intersect, l)
+
+# predicate functionals
+where <- function(f, x) {
+  vapply(x, f, logical(1))
+}
+df <- data.frame(x=1:3, y=c('a','b','c'))
+where(is.factor, df)
+str(Filter(is.factor, df))
+str(Find(is.factor, df))
+Position(is.factor, df)
+
+# mathematical functionals
+integrate(sin, 0, pi)
+str(uniroot(sin, pi * c(1/2, 3/2)))
+str(optimise(sin, c(0, 2*pi)))
+str(optimise(sin, c(0, pi), maximum=TRUE))
+
+# In statistics, optimisation, combined with closures, is often used
+# for solving MLE problems.
+# ---------------------------
+# 
+## a function factory that, given a dataset, returns a function that
+## computes the negative log likelihood (NLL) for parameter lambda.
+poisson_nll <- function(x) {
+  n <- length(x)
+  sum_x <- sum(x)
+  function(lambda) {
+    n * lambda - sum_x * log(lambda) # + terms not involving lambda
+  }
+}
+
+x1 <- c(41, 30, 31, 38, 29, 24, 30, 29, 31, 38)
+x2 <- c(6, 4, 7, 3, 3, 7, 5, 2, 2, 7, 5, 4, 12, 6, 9)
+nll1 <- poisson_nll(x1)
+nll2 <- poisson_nll(x2)
+optimise(nll1, c(0,100))$minimum
+optimise(nll2, c(0,100))$minimum
+
+# function operators
+# ------------------
+
+chatty <- function(f) {
+  function(x, ...) {
+    res <- f(x, ...)
+    cat("Processing ", x, "\n", sep="")
+    res
+  }
+}
+f <- function(x) x^2
+s <- c(3,2,1)
+chatty(f)(1)
+vapply(s, chatty(f), numeric(1))
