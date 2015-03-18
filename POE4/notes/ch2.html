@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <link rel="stylesheet" href="/home/kevin/styles/style.css" type="text/css" />
+  <script src="/home/kevin/lib/MathJax-master/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="简单线性回归模型"><span class="header-section-number">1</span> 简单线性回归模型</h1>
+<p>看一个简单但重要的经济例子。假定我们要考察家庭收入与食物支出之间的关系。从一个特定总体中随机选择一些家庭，该特定总体可以是某个省市或全国。假设我们目前只关心周收入为1000元的家庭，从中选取一些家庭，进行询问：上周你家人均食物支出多少？这里的周食物支出（记为\(y\)）是随机变量。记收入为\(x\)。</p>
+<p>为了考察支出与收入之间的关系，我们需要建立一个经济模型及相应的计量模型。由经济理论知道，平均周人均支出\(E(y|x)=\mu_{y|x}\)是收入\(x\)的函数，对于不同的收入水平（比如2000元），相应的平均周人均支出也不一样。换言之，周人均支出的概率分布取决于收入水平（条件分布）。假定这种关系是线性的： \[ E(y|x)=\mu_{y|x}=\beta_1+\beta_2 x\] 上式的条件均值称为简单回归函数（simple regression function）。其中的\(\beta_2\)实际上就是边际消费倾向。这个经济模型是实际经济行为的一种抽象。给定\(x=1000\)，\(y\)是一个均值为\(\beta_1+\beta_2(1000)\)的随机变量，对于每一个\(x\)都如此：</p>
+<center>
+<img src="images/fig2.3.png" alt="不同收入水平下y的概率密度函数" />
+</center>
+
+<p>线性回归函数是计量模型的基础，再对数据做一些假定，就得到计量模型：</p>
+<ul>
+<li>对于每个\(x\)，\(y\)的分布具有同方差： \[\mathrm{var}(y|x)=\sigma^2\]</li>
+<li>\(y\)（的样本点）之间不相关（协方差为0），即它们之间不具有线性关系： \[\mathrm{cov}(y_i,y_j)=0\] （更强的假设是，\(y\)之间统计独立）</li>
+<li>\(x\)不是随机的，且必须取至少两个值</li>
+<li>（可选）对每个\(x\)，\(y\)都服从正态分布： \[y\sim N\left[(\beta_1+\beta_2 x),\sigma^2\right]\]</li>
+</ul>
+<p>上面的模型直接对被解释变量作出假定，出于统计上方便的目的，我们可以用另一种方式对假定进行描述。回归分析的本质是，被解释变量的每个观测值都可以分解成两个部分：一个是系统性分量，一个是随机分量。系统性分量就是\(y\)的条件均值（回归函数），它本身并不是随机的。随机分量是\(y\)与其条件均值之间的差，称为随机误差项（random error term），定义为： \[e=y-E(y|x)=y-\beta_1-\beta_2 x\] 从而，简单线性回归模型可重写为： \[y=\beta_1+\beta_2 x + e\] 由于\(y\)随机，因此\(e\)也随机，基于上述有关假定，我们可以得到\(e\)的性质：均值为0，具有同方差\(\sigma^2\)。也就是说，\(y\)和\(e\)的概率密度函数只是位置不一样：</p>
+<center>
+<img src="images/fig2.4.png" alt="y和e的概率密度函数" />
+</center>
+
+<p>现在我们可以进一步讨论上述关于\(x\)假定。\(x\)非随机意味着它的值是已知的，在统计上，这样的值被称为“随机抽样中固定”。实际上这种情况很少见，但作出这样的假定不影响后面的结果，而且在记号处理上比较方便。既然\(x\)非随机，我们就不需要再使用条件符号\(|\)了（也有一些情况下不能假定\(x\)固定，后面详述）。</p>
+<center>
+<img src="images/assumptions_slrm_II.png" alt="简单线性回归模型假定II" />
+</center>
+
+<p>为了估计参数，我们用最小二乘法则（least square principle）：每个点到拟合线的垂直距离的平方和最小。拟合线为： \[\hat{y}_i=b_1+b_2 x_i\] 样本点到拟合线的垂直距离，称为最小二乘残差（least square residuals）： \[\hat{e}_i=y_i-\hat{y}_i=y_i-b_1-b_2 x_i\] LS法则说的是，最佳的拟合系数\(b_1,b_2\)，将使下面的残差平方和最小： \[SSE=\sum_{i=1}^N\hat{e}_i^2\] 问题是如何方便地求得这样的系数？只要求解一个最优化问题： \[\min_{\beta_1,\beta_2} S(\beta_1,\beta_2)=\sum_{i=1}^N(y_i-\beta_1-\beta_2 x_i)^2\] 该问题的解称为最小二乘估计（least square estimators）： \[b_2=\frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2}\] \[b_1=\bar{y}-b_2 \bar{x}\] 其中，\(\bar{y}\)和\(\bar{x}\)分别为\(y\)和\(x\)的样本均值。将数据点代入上面两个式子，就得到截距和斜率的估计值（estimates）。事实上，\(b_1\)和\(b_2\)是随机变量，对于每一个特定样本，得到\(b_1\)和\(b_2\)的一个观测。所以，作如下区分：上面的一般公式成为最小二乘估计（estimators），应用于某个特定样本得到的是最小二乘估计值（estimates）。</p>
+<p>对于食物支出的例子，得到最小二乘估计值后，可以给出拟合回归线： \[\hat{y}_i = 83.42 + 10.21 x_i\] R代码如下：</p>
+<pre><code>food &lt;- read.table(&#39;data/food.dat&#39;)
+colnames(food) &lt;- c(&#39;food_exp&#39;,&#39;income&#39;)
+food_lm &lt;- lm(food_exp ~ income, data=food)
+summary(food_lm)</code></pre>
+<p>得到最小二乘估计值后，就可以用它们来解释所考虑的经济模型，也可以作预测。（注意，解释截距时需要非常小心，因为通常我们并没有\(x=0\)的点。）</p>
+<p>从上面的模型，我们可以得到<strong>收入弹性</strong>（income elasticity）： \[\varepsilon = \frac{\Delta E(y)/E(y)}{\Delta x/x}=\beta_2\cdot\frac{x}{E(y)}\] 回归线上每一点的弹性并不相同，通常我们计算均值点上的弹性： \[\hat{\varepsilon}=b_2\frac{\bar{x}}{\bar{y}}=10.21\times \frac{19.60}{283.57}=0.71\] 这个收入弹性估计值意味着，当\(x\)和\(y\)取其样本均值时，平均意义上，收入每增加1%，食物支出增加0.71%。可以发现，由于收入弹性小于1，这里的食物属于必需品（necessity）而不是奢侈品（luxury）。</p>
+<p>我们得到了最小二乘估计，那么它们好不好？这个问题本质上是无法回答的。因为我们永远无法知道真实值，到底这些估计与真实值多接近，我们无法得知。与其讨论估计的质量，我们退一步，考察估计过程的质量。如果选择另一个样本，即使数量和收入水平都相同，也将得到不同的估计。这种抽样差异（sampling variation）是不可避免的。因此，作为估计过程，\(b_1\)和\(b_2\)都是随机变量，它们的性质称为抽样性质（sampling properties）。</p>
+<p>考察估计\(b_2\)。上面的公式称为均值离差形式（deviation from mean form）。利用假设SR1，可将\(b_2\)写成线性形式： \[b_2=\sum_{i=1}^N w_i y_i,\quad w_i=\frac{x_i-\bar{x}}{\sum(x_i-\bar{x})^2}\] 由于\(w_i\)取决于非随机的\(x\)，因此\(w_i\)也是非随机的。上式意味着，每个估计量都是\(y_i\)的加权平均，这样的估计量称为线性估计量（linear estimators）。\(b_2\)还可以进一步写成理论上更方便的形式： \[b_2 = \beta_2 + \sum w_i e_i\]</p>
+<p>先看均值。对上式取期望，容易得到\(E(b_2)=\beta_2\)，说明在前面的模型假定下，\(b_2\)是\(\beta_2\)的无偏估计。其中用到“误差均值为0”（SR2）和“解释变量非随机”（SR5）两个假设。容易证明，\(b_1\)也是\(\beta_1\)的无偏估计。无偏性并不是说每一个样本作回归得到的估计值（estimate）都接近真实参数，而是说在平均意义下接近。假如我们从同一个总体中重复抽样，分别作回归，得到的估计值的均值将接近真实参数。换句话说，我们不能说最小二乘估计值是无偏的，只能说最小二乘估计过程是无偏的。</p>
+<p>再看方差和协方差。方差衡量估计量的精度（precision），它告诉我们不同样本得到的估计值之间变化有多大。因此，常常讨论估计量的抽样方差（sampling variance）或抽样精度（sampling precision）。方差越小，抽样精度越大。当SR1-SR5成立时，我们有： \[\mathrm{var}(b_1)=\sigma^2\left[\frac{\sum x_i^2}{N\sum(x_i-\bar{x})^2}\right]\] \[\mathrm{var}(b_2)=\frac{\sigma^2}{\sum(x_i-\bar{x})^2}\] \[\mathrm{cov}(b_1,b_2)=\sigma^2\left[\frac{-\bar{x}}{\sum(x_i-\bar{x})^2}\right]\]</p>
+</body>
+</html>
