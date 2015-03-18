@@ -76,4 +76,35 @@ $$\mathrm{var}(b_2)=\frac{\sigma^2}{\sum(x_i-\bar{x})^2}$$
 $$\mathrm{cov}(b_1,b_2)=\sigma^2\left[\frac{-\bar{x}}{\sum(x_i-\bar{x})^2}\right]$$
 影响方差和协方差的因素有：
 
-- 随机误差项方差$\sigma^2$越大，
+- 随机误差项方差$\sigma^2$
+- 解释变量离差平方和
+- 样本容量
+- 解释变量观测值的平方和（影响$b_1$的方差）
+- 解释变量的样本均值
+
+GAUSS－MARKOV定理：对于满足假设SR1-SR5的线性回归模型，最小二乘估计量$b_1$和$b_2$是具有最小方差的线性无偏估计（BLUE）。
+
+下面考察LS估计量的概率分布。如果假设SR6成立，则有：
+$$b_1\sim N\left(\beta_1,\frac{\sigma^2\sum x_i^2}{N\sum(x_i-\bar{x})^2}\right)$$
+$$b_2\sim N\left(\beta_2,\frac{\sigma^2}{\sum(x_i-\bar{x})^2}\right)$$
+如果误差项不服从正态分布，只要样本容量足够大，由中心极限定理（CLT）可知，LS估计量近似服从正态分布。
+
+最后只剩一个未知参数$\sigma^2$，我们有：
+$$\mathrm{var}(e_i)=\sigma^2=E(e_i^2)$$
+但$e_i$不可观测，不能对其取均值作为方差的估计。一个合理的替代品是残差，可以证明：
+$$\hat{\sigma}^2=\frac{\sum\hat{e}_i^2}{N-2}$$
+是误差方差的无偏估计，其中分母中的2就是估计参数的个数。
+
+有了误差方差的无偏估计，我们就可以估计最小二乘估计量的方差和协方差：
+$$\hat{\mathrm{var}(b_1)}=\hat{\sigma}^2\left[\frac{\sum x_i^2}{N\sum(x_i-\bar{x})^2}\right]$$
+$$\hat{\mathrm{var}(b_2)}=\frac{\hat{\sigma}^2}{\sum(x_i-\bar{x})^2}$$
+$$\hat{\mathrm{cov}(b_1,b_2)}=\hat{\sigma}^2\left[\frac{-\bar{x}}{\sum(x_i-\bar{x})^2}\right]$$
+这些估计方差的平方根称为“标准误”（standard errors）：
+$$\mathrm{se}(b_1)=\sqrt{\hat{\mathrm{var}(b_1)}}$$
+$$\mathrm{se}(b_2)=\sqrt{\hat{\mathrm{var}(b_2)}}$$
+标准误度量了最小二乘估计量在重复抽样中的抽样变异性（sampling variability）,通过Monte Carlo模拟，可以看到标准误确实接近真实抽样变异。
+
+世界并非线性。事实上，很多经济关系都是曲线（curvilinear）关系。通过变量转换，简单线性模型也可以刻画非线性关系。考虑房地产价格的例子。价格（PRICE）是房子尺寸（SQFT）的函数，一般认为，大房子尺寸增加的价值比小房子大，并不是同步增加的。可以用平方项或对数项替换线性项。加入平方项，得到二次模型：
+$$PRICE=\alpha_1+\alpha_2 SQFT^2+e$$
+这也是一个简单线性回归模型，此时$y=PRICE$，$x=SQFT^2$。当然，模型参数$\alpha_2$不再表示斜率。用前面的方法得到参数估计$\hat{\alpha}_1$和$\hat{\alpha}_2$，则拟合方程为：$\hat{PRICE}=\hat{\alpha}_1+\hat{\alpha}_2SQFT^2$，斜率为：
+$$\frac{d\left(\hat{PRICE}\right)}{dSQFT}=2\hat{\alpha}_2SQFT$$
