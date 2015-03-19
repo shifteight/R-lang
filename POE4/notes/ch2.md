@@ -96,15 +96,51 @@ $$\hat{\sigma}^2=\frac{\sum\hat{e}_i^2}{N-2}$$
 是误差方差的无偏估计，其中分母中的2就是估计参数的个数。
 
 有了误差方差的无偏估计，我们就可以估计最小二乘估计量的方差和协方差：
-$$\hat{\mathrm{var}(b_1)}=\hat{\sigma}^2\left[\frac{\sum x_i^2}{N\sum(x_i-\bar{x})^2}\right]$$
-$$\hat{\mathrm{var}(b_2)}=\frac{\hat{\sigma}^2}{\sum(x_i-\bar{x})^2}$$
-$$\hat{\mathrm{cov}(b_1,b_2)}=\hat{\sigma}^2\left[\frac{-\bar{x}}{\sum(x_i-\bar{x})^2}\right]$$
+$$\widehat{\mathrm{var}(b_1)}=\hat{\sigma}^2\left[\frac{\sum x_i^2}{N\sum(x_i-\bar{x})^2}\right]$$
+$$\widehat{\mathrm{var}(b_2)}=\frac{\hat{\sigma}^2}{\sum(x_i-\bar{x})^2}$$
+$$\widehat{\mathrm{cov}(b_1,b_2)}=\hat{\sigma}^2\left[\frac{-\bar{x}}{\sum(x_i-\bar{x})^2}\right]$$
 这些估计方差的平方根称为“标准误”（standard errors）：
-$$\mathrm{se}(b_1)=\sqrt{\hat{\mathrm{var}(b_1)}}$$
-$$\mathrm{se}(b_2)=\sqrt{\hat{\mathrm{var}(b_2)}}$$
+$$\mathrm{se}(b_1)=\sqrt{\widehat{\mathrm{var}(b_1)}}$$
+$$\mathrm{se}(b_2)=\sqrt{\widehat{\mathrm{var}(b_2)}}$$
 标准误度量了最小二乘估计量在重复抽样中的抽样变异性（sampling variability）,通过Monte Carlo模拟，可以看到标准误确实接近真实抽样变异。
 
 世界并非线性。事实上，很多经济关系都是曲线（curvilinear）关系。通过变量转换，简单线性模型也可以刻画非线性关系。考虑房地产价格的例子。价格（PRICE）是房子尺寸（SQFT）的函数，一般认为，大房子尺寸增加的价值比小房子大，并不是同步增加的。可以用平方项或对数项替换线性项。加入平方项，得到二次模型：
 $$PRICE=\alpha_1+\alpha_2 SQFT^2+e$$
-这也是一个简单线性回归模型，此时$y=PRICE$，$x=SQFT^2$。当然，模型参数$\alpha_2$不再表示斜率。用前面的方法得到参数估计$\hat{\alpha}_1$和$\hat{\alpha}_2$，则拟合方程为：$\hat{PRICE}=\hat{\alpha}_1+\hat{\alpha}_2SQFT^2$，斜率为：
-$$\frac{d\left(\hat{PRICE}\right)}{dSQFT}=2\hat{\alpha}_2SQFT$$
+这也是一个简单线性回归模型，此时$y=PRICE$，$x=SQFT^2$。当然，模型参数$\alpha_2$不再表示斜率。用前面的方法得到参数估计$\hat{\alpha}_1$和$\hat{\alpha}_2$，则拟合方程为：$\widehat{PRICE}=\hat{\alpha}_1+\hat{\alpha}_2SQFT^2$，斜率为：
+$$\frac{d\left(\widehat{PRICE}\right)}{dSQFT}=2\hat{\alpha}_2SQFT$$
+除了加入平方项，也可引入对数项，得到对数线性模型（log-linear model）。对数线性函数形式为：$\ln(y)=a+bx$。对数线性函数相当于指数函数，其中，$y>0$，任意一点的斜率为$by$，意味着当$b>0$时，$y$越大其边际效应也越大。有时也称这种情况为“按递增速度增加”。容易计算，对数线性模型的弹性为$bx$。系数$b$实际上是所谓的半弹性（semi-elasticity）：
+$$\eta=\frac{100(dy/y)}{dx}=100b$$
+表示$x$变化一个单位时$y$变化的百分比。对前面的例子应用对数线性模型得到：
+$$\ln(PRICE)=\gamma_1+\gamma_2 SQFT+e$$
+对应变量采用对数变换，可以将右偏的数据正则化，很多经济变量，比如价格、收入、工资等都具有偏性分布，对其取对数很常见。可以用类似方法求得估计，从而得到斜率为$0.0004113\widehat{PRICE}$，弹性为$0.0004113SQFT$，半弹性为0.04%（意味着每增加1平方英尺，房价上升0.04%；或者说，增加100平方英尺，房价上升4%）。
+
+指示变量（indicator variable）是只取0或1的二元变量，用来表示性别、种族、位置等非定量变量。以``utown.dat``数据集为例，其中``utown``是指示变量，当房子靠近大学时为1，否则为0。如果将UTOWN作为解释变量，回归模型为：
+$$PRICE=\beta_1+\beta_2UTOWN+e$$
+回归函数可以写成：
+$$E(PRICE)=\beta_1+\beta_2UTOWN=
+\begin{cases}
+\beta_1+\beta_2 & \mbox{if $UTOWN=1$} \\
+\beta_1 & \mbox{if $UTOWN=0$}
+\end{cases}
+$$
+这意味着两类区域的平均房价不同。$\beta_2$并不是斜率，而是表示两类区域的均价之差。由于模型中除了区域位置外没有其他变量，可以认为指示变量将观测划分为两个总体。利用LS估计，可得到回归方程为：
+$$\widehat{PRICE}=b_1+b_2UTOWN=215.7325+61.5091UTOWN$$
+因此，University Town（$UTOWN=1$）的均价为277241.60，Golden Oaks（$UTOWN=0$）的均价为215732.50。回归模型中的参数$\beta_1$表示Golden Oaks的样本均值，$\beta_2$表示两类区域的样本均值之差。
+
+**附录：Monte Carlo模拟**
+所谓MC模拟，先设定一个数据生成过程（DGP），再通过计算机随机数生成器创建人工数据样本。基于这些样本，研究估计量的重复抽样性质。简单线性回归模型的DGP为：
+$$y_i=E(y_i|x_i)+e_i=\beta_1+\beta_2x_i+e_i,\quad i=1,\ldots,N$$
+为了得到$y_i$，我们先创建回归关系的系统部分$E(y_i|x_i)$，再加上一个随机误差$e_i$。为了创建回归函数，需要三步：
+
+- 选择样本容量$N$。对于前面的例子来说，我们选$N=40$。
+- 选择$x_i$。设定$x_1,x_2,\ldots,x_{20}=10,x_{21},x_{22},\ldots,x_{40}=20$。
+- 选择系数$\beta_1,\beta2$。有趣的是，对于满足SR1-SR5的最小二乘估计，这些参数的实际大小并无太大影响。估计方差和协方差并不依赖它们。为了与回归结果大致一致，设定$\beta_1=100,\beta_2=10$。
+
+在这样的设定下，我们可以创建40个数据点：
+$$E(y_i|x_i=10)=100+10\times 10=200,\quad i=1,\ldots,20$$
+$$E(y_i|x_i=20)=100+10\times 20=300,\quad i=21,\ldots,40$$
+
+为了创建随机误差，需要用随机数生成器。计算机生成的随机数是伪随机数，大约生成$10^{13}$个值后就会重复（recycling），不过这些数应该够了。假定SR6成立，且选择$\sigma^2=2500$。有了随机误差，就可以得到一个样本（mc1.dat）。对其进行估计，得到：
+$$\hat{y}=75.7679+11.9683x_i$$
+且$SRR=\hat{\sigma}=51.5857$。
+从单个样本得到的估计说明不了问题（即使比较接近真实值），需要通过生成多个样本才能得到重复抽样性质。MC的目标就是重复抽样。假设我们得到$M=1000$个样本，就可以得到1000组系数和误差的估计值。对系数取均值，来验证是否无偏；同样，可以对系数的样本方差、误差方差的估计值进行验证。此外，还可以验证估计量是否服从正态分布。
