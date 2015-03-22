@@ -1,14 +1,19 @@
+---
+output:
+  html_document:
+    css: ~/Bak/styles/style.css
+---
 # 区间估计和假设检验
 
 最小二乘估计给出的是回归模型参数的点估计（point estimates），表示对回归函数$E(y)=\beta_1+\beta_2x$的推断（inference）。这里”推断“的意思是，从已知或假定出发，经过推理得出结论。区间估计（interval estimation）和假设检验（hypothesis testing）是统计推断的两个重要工具。IE和HT依赖假设SR6。如果SR6不成立，则当样本容量足够大，可以得到近似结果。
 
 ## 区间估计
 当SR1-SR6成立时，$b_2$服从正态分布，对其进行标准化：
-$$Z=\frac{b_2-\beta_2}{\sqrt{\sigma^2/\sum(x_i-\bar{x})^2}}\sim N(0,1)$$
+$$Z=\frac{b_2-\beta_2}{\sqrt{\left. \sigma^2 \middle/ \sum(x_i-\bar{x})^2 \right.}}\sim N(0,1)$$
 由正态分布表可知，$P(-1.96\leq Z\leq 1.96)=0.95$，从而有：
-$$P\left(b_2-1.96\sqrt{\sigma^2/\sum(x_i-\bar{x})^2}\leq\beta_2\leq b_2+\sqrt{\sigma^2/\sum(x_i-\bar{x})^2}\right)=0.95$$
+$$P\left(b_2-1.96\sqrt{\left. \sigma^2 \middle/ \sum(x_i-\bar{x})^2 \right.} \leq\beta_2\leq b_2+1.96\sqrt{\left. \sigma^2 \middle/ \sum(x_i-\bar{x})^2 \right.}\right)=0.95$$
 上式定义了一个在0.95概率下包含参数$\beta_2$的区间。其中的两个端点给出了区间估计量（interval estimator）。在重复抽样中，这样构造的区间中有95%将会包含真实参数$\beta_2$。这个估计量依赖于未知的误差方差，需要用其估计量代替，但将$\sigma^2$换成$\hat{\sigma}^2$后，上面的正态分布就变成了具有2个自由度的t分布：
-$$t=\frac{b_2-\beta_2}{\sqrt{\hat{\sigma}^2/\sum(x_i-\bar{x})^2}}=\frac{b_2-\beta_2}{\sqrt{\widehat{\mathrm{var}(b_2)}}}=\frac{b_2-\beta_2}{\mathrm{se}(b_2)}\sim t_{(N-2)}$$
+$$t=\frac{b_2-\beta_2}{\sqrt{\left. \hat{\sigma}^2 \middle/ \sum(x_i-\bar{x})^2\right.}}=\frac{b_2-\beta_2}{\sqrt{\widehat{\mathrm{var}(b_2)}}}=\frac{b_2-\beta_2}{\mathrm{se}(b_2)}\sim t_{(N-2)}$$
 $b_1$也是如此。一般意义下，对于满足假定SR1-SR6的简单线性回归模型，我们有：
 $$t=\frac{b_k-\beta_k}{\mathrm{se}(b_k)}\sim t_{(N-2)},\quad k=1,2$$
 上式是简单线性回归模型进行区间估计和假设检验的基础。
@@ -17,7 +22,7 @@ t分布的临界值$t_c$满足：$P(t\geq t_c)=P(t\leq -t_c)=\alpha/2$，其中$
 $$p\left[-t_c\leq\frac{b_k-\beta_k}{\mathrm{se}(b_k)}\leq t_c\right]=1-\alpha$$
 从而，
 $$P[b_k-t_c\mathrm{se}(b_k)\leq\beta_k\leq b_k+t_c\mathrm{se}(b_k)]=1-\alpha$$
-区间端点$b_k\pm t_c\mathrm{se}(b_k)$是随机变量，它们定义了$\beta_k$的一个区间估计量。当基于某个样本得到$b_k$和$\mathrm{se}(b_k)$，则得到$\beta_k$的一个区间估计值，称为$100(1-\alpha)%$区间估计值（interval estimate），也叫$100(1-\alpha)%$置信区间（confidence interval）。
+区间端点$b_k\pm t_c\mathrm{se}(b_k)$是随机变量，它们定义了$\beta_k$的一个区间估计量。当基于某个样本得到$b_k$和$\mathrm{se}(b_k)$，则得到$\beta_k$的一个区间估计值，称为$100(1-\alpha)\%$区间估计值（interval estimate），也叫$100(1-\alpha)\%$置信区间（confidence interval）。
 
 ## 假设检验
 所谓假设检验，就是将我们对总体特征的猜测与数据样本信息作比较。给定一个经济和统计模型，我们设定关于经济行为的假设，再将这些假设用模型参数来表达。假设检验包括五个要素：
