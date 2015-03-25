@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/Users/kevin/Bak/styles/style.css" type="text/css" />
+  <script src="/Users/kevin/Documents/MathJax-master/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<h1 id="多元回归模型"><span class="header-section-number">1</span> 多元回归模型</h1>
+Big Andy汉堡店需要评估价格策略和广告支出对销售的影响（数据集：andy.dat）。经济模型为： <span class="math">\[SALES=\beta_1+\beta_2PRICE+\beta_3ADVERT\]</span> 由于城市大小对销售额影响很大，我们只选择小城市作为样本。<span class="math">\(PRICE\)</span>可采用某个价格指数。相应的计量模型为： <span class="math">\[SALES=E(SALES)+e=\beta_1+\beta_2PRICE+\beta_3ADVERT+e\]</span> 其中，系统部分是一个平面，称为回归平面。
+<center>
+<img src="images/fig5.1.png" alt="多元回归平面" />
+</center>
+<p>一般的多元线性回归模型为： <span class="math">\[y=\beta_1+\beta_2x_2+\beta_3x_3+\cdots+\beta_Kx_K+e\]</span> 相应的，本例模型可以改写为： <span class="math">\[y=\beta_1+\beta_2x_2+\beta_3x_3+e\]</span> 我们作如下假设：</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(E(e)=0\)</span></li>
+<li><span class="math">\(\mathrm{var}(e)=\sigma^2\)</span></li>
+<li><span class="math">\(\mathrm{cov}(e_i,e_j)=0\)</span></li>
+<li><span class="math">\(e\simN(0,\sigma^2)\)</span></li>
+</ol>
+<p>从而，被解释变量具有性质：</p>
+<ol style="list-style-type: decimal">
+<li><span class="math">\(E(y)=\beta_1+\beta_2x_2+\beta_3x_3\)</span></li>
+<li><span class="math">\(\mathrm{var}(y)=\mathrm{var}(e)=\sigma^2\)</span></li>
+<li><span class="math">\(\mathrm{cov}(y_i,y_j)=\mathrm{cov}(e_i,e_j)=0\)</span></li>
+<li><span class="math">\(y\sim N[(\beta_1+\beta_2x_2+\beta_3x_3),\sigma^2]\)</span></li>
+</ol>
+</body>
+</html>
