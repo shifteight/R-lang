@@ -5,13 +5,16 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <title></title>
-  <link rel="stylesheet" href="/home/kevin/styles/style.css" type="text/css" />
-  <script src="/home/kevin/lib/MathJax-master/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="/Users/kevin/Bak/styles/style.css" type="text/css" />
+  <script src="/Users/kevin/Documents/MathJax-master/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body>
 <h1 id="多元回归的进一步推断"><span class="header-section-number">1</span> 多元回归的进一步推断</h1>
 <p>本章主要讨论同时对多个变量进行显著性检验、受限最小二乘法以及多元回归的模型设定问题（重点讨论变量选择）。假设MR1-MR6成立。</p>
 <h2 id="联合假设检验"><span class="header-section-number">1.1</span> 联合假设检验</h2>
-<p>对联合假设的检验是\(F\)-test。</p>
+<p>对联合假设的检验采用<span class="math">\(F\)</span>-test。比如： <span class="math">\[SALES=\beta_1+\beta_2PRICE+\beta_3ADVERT+\beta_4ADVERT^2+e\]</span> 希望检验广告支出是否影响SALES，需要同时对线性项和平方项进行检验，亦即： <span class="math">\[H_0:\beta_3=0,\beta_4=0\]</span> <span class="math">\[H_1:\beta_3,\beta_4 \mathrm{至少一个不为}0\]</span> 当<span class="math">\(H_0\)</span>成立时，上面的模型就变成受限模型（restricted model）： <span class="math">\[SALES=\beta_1+\beta_2 PRICE +e\]</span> <span class="math">\(F\)</span>检验基于对受限模型残差平方和（<span class="math">\(SSE_R\)</span>）和非受限模型残差平方和（<span class="math">\(SSE_U\)</span>）的比较。增加变量个数将减小误差平方和，即<span class="math">\(SSE_R-SSE_U\leq 0\)</span>。<span class="math">\(F\)</span>检验就是考察这种差异是不是显著。相应的统计量为： <span class="math">\[F=\frac{(SSE_R-SSE_U)/J}{\left. SSE_U \middle/ (N-K)\right.}\]</span> 其中，<span class="math">\(J\)</span>为限制数，<span class="math">\(N\)</span>为观测数目，<span class="math">\(K\)</span>为非受限模型中的系数个数。若<span class="math">\(H_0\)</span>成立，该统计量服从<span class="math">\(F(J,N-K)\)</span>。当两个平方和之间差异较大时，<span class="math">\(F\)</span>较大，此时拒绝原假设。在上面的例子中，<span class="math">\(F=8.44\)</span>，相应的<em>p</em>值为<span class="math">\(P(F_{(2,71)}&gt;8.44)=0.0005\)</span>，对于<span class="math">\(0.01\)</span>或<span class="math">\(0.05\)</span>的显著性水平，我们均应拒绝原假设，认为至少有一个系数不等于0，也就是说，广告支出确实对销售有显著影响。</p>
+<p><span class="math">\(F\)</span>检验的一个重要应用是检验模型的整体显著性。对于模型： <span class="math">\[y=\beta_1 + x_2\beta_2 + x_3\beta_3+\cdots+x_K\beta_K+e\]</span> 设定：<span class="math">\(H_0:\beta_2=\beta_3=\cdots=\beta_K=0, H_1:\mathrm{至少一个}\beta_K{不等于}0\)</span></p>
+<p>当原假设成立，受限模型为： <span class="math">\[y_i=\beta_1 + e_i\]</span> _1的LS估计为<span class="math">\(b_1^*=\bar{y}\)</span>，受限误差平方和为： <span class="math">\[SSE_R=\sum_{i=1}^N (y_i-b_1^\star)^2=\sum_{i=1}^N (y_i-\bar{y})^2=SST\]</span> 未受限误差平方和为<span class="math">\(SSE_U=SSE\)</span>，限制数为<span class="math">\(J=K-1\)</span>，因此，<span class="math">\(F\)</span>统计量为： <span class="math">\[F=\frac{\left.(SST-SSE)\middle/(K-1)\right.}{\left.SSE\middle/(N-K)\right.}\]</span></p>
 </body>
 </html>
