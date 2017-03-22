@@ -1,3 +1,47 @@
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ,y=hwy))
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = cyl, y = hwy))
+
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, color=class))
+
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, alpha=class))
+
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, shape=class))
+
+# color, size, shape for continuous variables
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, color=cty))
+
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, size=cty))
+
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y=hwy, shape=cty)) # error
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy), color="blue")
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ class, nrow = 2)
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ cyl)
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
   geom_point() + 
   geom_smooth()
