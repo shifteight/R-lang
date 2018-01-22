@@ -114,8 +114,8 @@ ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = factor(1), fill = cut), width = 1) + 
   coord_polar(theta = "y")
 
-# library(nycflights13)
-# library(dplyr)
+library(nycflights13)
+
 (dec25 <- filter(flights, month == 12, day == 25))
 
 filter(flights, month %in% c(11,12))
