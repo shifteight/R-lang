@@ -83,6 +83,9 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
   geom_point() + 
   geom_smooth(se = FALSE)
 
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut))
+
 ggplot(data=diamonds) +
   geom_bar(mapping=aes(x=cut, fill=cut))
 
