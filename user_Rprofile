@@ -1,0 +1,9 @@
+options(digits=4)
+.libPaths(c("~/lib/R", .libPaths()))
+
+local({
+	r <- getOption("repos")
+	r["CRAN"] <- "https://mirrors.ustc.edu.cn/CRAN"
+	options(repos = r)
+	rm(r)
+})
