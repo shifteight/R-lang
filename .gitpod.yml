@@ -9,7 +9,7 @@ tasks:
 # action1
 # action2
     command: |
-      sudo apt install --assume-yes --no-install-recommends build-essential libcurl4-openssl-dev libssl-dev libxml2-dev r-base
+      apt install --assume-yes --no-install-recommends build-essential libcurl4-openssl-dev libssl-dev libxml2-dev r-base
 
 
 
