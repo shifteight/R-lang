@@ -1,0 +1,24 @@
+---
+## GITPOD SETTINGS
+
+# here are the automated tasks.
+
+tasks:
+  - name: install R
+# the | symbol allows multiple line actions
+# action1
+# action2
+    command: |
+      sudo apt install --assume-yes --no-install-recommends build-essential libcurl4-openssl-dev libssl-dev libxml2-dev r-base
+
+
+
+
+
+# here are the extensions
+vscode:
+  extensions:
+    - Ikuyadeu.r
+    - RDebugger.r-debugger
+    - anwar.papyrus-pdf
+    - mhutchie.git-graph
