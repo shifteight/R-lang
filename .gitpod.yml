@@ -8,7 +8,7 @@ tasks:
 # the | symbol allows multiple line actions
 # action1
 # action2
-    command: |
+    init: |
       #from https://cran.r-project.org/bin/linux/ubuntu/
       # update indices
       sudo apt update -qq
@@ -21,7 +21,7 @@ tasks:
       # add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
       sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
       sudo apt install  --assume-yes --no-install-recommends r-base
-      sudo add-apt-repository  --assume-yes ppa:c2d4u.team/c2d4u4.0+
+      sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
       sudo apt install  --assume-yes --no-install-recommends r-cran-rstan r-cran-tidyverse
 
 
